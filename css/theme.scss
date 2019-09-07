@@ -1,0 +1,22 @@
+@import 'color';
+.dark{
+    color:#ffffff;
+    background-color: $primary-dark;
+    nav.navbar-bottom{
+        background-color: $primary;
+        box-shadow: none;
+        border-bottom: 1px solid rgba(100,110,120,.15);
+    }
+    .main-home{
+        background-color: $primary;
+    }
+    header.navbar-header{
+        background-color: $primary-dark;
+    }
+}
+.page-header{
+    box-shadow: 0 1px 2px rgba(25,25,25,.1);
+    position: sticky;
+    z-index: 20;
+    top: 60px;
+}
