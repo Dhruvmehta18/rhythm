@@ -1,0 +1,65 @@
+#snackbar {
+    visibility: hidden;
+    width: auto;
+    margin-left: -125px;
+    background-color: #102027;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 2px;
+    position: fixed;
+    z-index: 50;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    height: auto;
+    #upload-temp-item{
+        padding: 16px;
+        background-color: inherit;
+        color: inherit;
+        width: auto;
+        height: auto;
+        .file-item-list .file-data-block .file-name-text{
+            color: #ffffff;
+            opacity: 0.8;
+        }
+        .file-item-list .file-data-block #file-size{
+            opacity: 0.6;
+        }
+        .item-text:hover{
+            background-color: #37474f;
+        }
+    }
+    #upload-temp-item:hover{
+        background-color: #37474f;
+    }
+    .upload-message{
+        min-width: 150px;
+        padding: 4px 6px;
+        font-size: 16px;
+        margin:auto;
+    }
+  }
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
