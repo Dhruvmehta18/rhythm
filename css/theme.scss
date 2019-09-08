@@ -2,6 +2,11 @@
 .dark{
     color:#ffffff;
     background-color: $primary-dark;
+    #header-search-form{
+            .search-form{
+                background-color: rgba(241, 243, 244, 0.08);
+            }
+    }
     nav.navbar-bottom{
         background-color: $primary;
         box-shadow: none;
@@ -12,6 +17,23 @@
     }
     header.navbar-header{
         background-color: $primary-dark;
+        .link-container:hover > a{
+            color: rgba(255,255,255,1);
+            transition: color 0.3s;
+        }
+        .sub-menu{
+            background-color: #ffffff;
+            color: #424242;
+            border-radius: 4px;
+            >li:hover{
+                background-color: #eeeeee;
+                transition: background-color 0.1s;
+            }
+            >li:active{
+                background-color: #bcbcbc;
+                transition: background-color 0.5s;
+            }
+        }
     }
 }
 .page-header{

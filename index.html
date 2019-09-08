@@ -23,29 +23,80 @@
                     </div>
                     <nav class="main-navigation" id="site-navigation">
                         <div class="main-menu-container">
-                            <ul class="top-nav-link">
+                            <ul class="top-nav-link nav">
                                 <li class="link-container"><a href="#" class="link">Home</a></li>
                                 <li class="link-container"><a href="#" class="link">Library</a></li>
                                 <li class="link-container"><a href="#" class="link">Search</a></li>
-                                <li class="link-container"><a href="#" class="link">Browse</a></li>
+                                <li class="link-container">
+                                    <a href="#" class="link">Browse</a>
+                                    <ul class="sub-menu" style="min-width:100px;">
+                                            <li>
+                                                <a href="#">hello</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">lid</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">sdsd</a>
+                                            </li>
+                                        </ul>
+                                </li>
                             </ul>
                         </div>
                     </nav>
                     <form id="header-search-form">
-                        <div class="search-form">
-                            <input type="search" value="" class="input" id="header-search-input" placeholder="Search" autocomplete="off" spellcheck="false" tabindex="-1" dir="ltr" />
-                        </div>
+                        <span class="search-form">
+                            <input type="search" name="search-hint" id="input-search-hint" value="" placeholder=""
+                                readonly autocomplete="off" spellcheck="false" tabindex="-1" dir="auto">
+
+                            <label class="material-icons line-height" id="main-search-icon">search</label>
+                            <input type="search" value="" class="input" id="header-search-input" placeholder="Search"
+                                autocomplete="off" spellcheck="false" dir="auto" />
+                            <pre aria-hidden="true" style="position: absolute;
+                            visibility: hidden;
+                            white-space: pre;
+                            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif;
+                            font-size: 14px;
+                            font-style: normal;
+                            font-variant: normal;
+                            font-weight: 700;
+                            word-spacing: 0px;
+                            letter-spacing: 0px;
+                            text-indent: 0px;
+                            text-rendering: auto;
+                            text-transform: none;">jhs</pre>
+                            <div class="dropdown-menu">
+                                <div class="dataset">
+                                    <a href="#" class="dropdown-item dropdown-suggestion">
+                                        <img src="image/song.jpg" alt="suggestion-image" sizes="" srcset="" />
+                                        <span>ks</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </span>
+                        </label>
                     </form>
                     <nav id="user-nav" class="main-navigation">
                         <div class="menu-after-login-container">
                             <ul id="menu-after-login" class="user-menu nav">
-                                <li class="btn-link menu-item menu-item-type-custom menu-item-object-custom menu-item-123"><a href="#">Upload</a></li>
                                 <li class="menu-item menu-item menu-avatar">
                                     <a href="">
                                         <span id="user-display-name">User</span>
-                                        <img src="image/song.jpg" alt="profile image" class="avatar"/>
+                                        <img src="image/song.jpg" alt="profile image" class="avatar" style="width: 36px;height: 36px;"/>
                                     </a>
+                                    <ul class="sub-menu">
+                                            <li>
+                                                <a href="#">hello</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">lid</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">sids</a>
+                                            </li>
+                                    </ul>
                                 </li>
+                                
                             </ul>
                         </div>
                     </nav>
@@ -263,6 +314,6 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 
 </html>

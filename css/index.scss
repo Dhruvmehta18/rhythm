@@ -4,7 +4,6 @@ body{
     min-height:100%;
     margin:$zero;
 	font-size: 16px;
-	font-family: sans-serif,Verdana;
 	line-height: 1.5;
 }
 img{
@@ -42,6 +41,7 @@ img{
             display: flex;
             justify-content: center;
             align-self: center;
+            color: rgba(255,255,255,1);
             .brand-name{
                 font-size: 24px;
                 padding: 8px 16px;
@@ -55,19 +55,72 @@ img{
                     li.link-container{
                         position: relative;
                         display: flex;
-                        align-items: center;
-                        
+                        align-items: flex-start;;
                     }
+                }
+            }
+            ul {
+                ul {
+                    font-size: 0.85rem;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                    position: absolute;
+                    top: 100%;
+                    left: -999em;
+                    z-index: 1000;
+                }
+                li:hover > ul, li.focus > ul {
+                    left: auto;
                 }
             }
         }
         #header-search-form{
             flex: 1;
             display: flex;
-            align-items: center;
+            justify-content: flex-end;
             padding: 0 .5rem;
-            .search-form{
-                overflow: hidden;
+            width:auto;
+            input{
+                width: 160px;
+                height: 2.5rem;
+                border: 0!important;
+                outline: 0!important;
+                box-shadow: none!important;
+                color: inherit;
+                opacity: 0.5;
+                font-weight: 700;
+                transition-delay: .5s;
+                transition: opacity .3s ease-in-out,width .3s;
+            }
+                .search-form{
+                    position: relative;
+                    display: inline-block;
+                    border-radius: 4px;
+                    margin: 0 8px;
+                    #main-search-icon{
+                        vertical-align: text-top;
+                        padding:0 0 0 4px;
+                    }
+                    #input-search-hint{
+                    width:auto;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    border-color: transparent;
+                    box-shadow: none;
+                    opacity: 1;
+                    background: none 0% 0% / auto repeat scroll padding-box border-box;
+                    }
+                    #header-search-input{
+                        position: relative;
+                        vertical-align: top;
+                        background-color: transparent;
+                    }
+                    
+                }
+                .dropdown-menu{
+                    width: 100%;
+                    margin-top: 16px;
+                }
             }
         }
         #user-nav {
@@ -79,9 +132,61 @@ img{
                 transition: height .3s;
                 transition-delay: .2s;
             }
+            ul{
+                li.focus>ul{
+                    right: 0;
+                }
+                ul {
+                    display: block!important;
+                }
+                
+            }
         }
-        
-       
+    }
+    .sub-menu{
+        >li{
+        min-width: 100%;
+            >a{
+                padding: 8px 4px;
+            }
+        }
+    }
+    .dropdown-item{
+        img{
+            max-width: 32px;
+            border-radius: 3px;
+            display: inline-block;
+            vertical-align: middle;
+            height: auto;
+        }
+    }
+    .dropdown-menu{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 10rem;
+        padding: .5rem 0;
+        margin: .125rem 0 0;
+        font-size: .875rem;
+        color: #212529;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(19,24,44,.15);
+        border-radius: .25rem;
+        text-shadow: none;
+        a {
+            display: flex;
+            align-items: center;
+            padding: .5rem 1rem;
+            word-break: break-word;
+        }
+        img{
+            border-radius: 50%;
+        }
     }
     .top-nav-link{
             align-self: center;
@@ -115,12 +220,15 @@ img{
         height: 60px;
         transition: height .3s;
         transition-delay: .2s;
-        li{
+        >li{
         position: relative;
         float: none;
         display: flex;
         align-items: center;
         width: auto;
+        >a{
+            padding: 0 0.5rem;
+        }
         }
         li.btn-link a {
             position: relative;
@@ -133,7 +241,7 @@ img{
 	        padding: 0.5rem 1rem;
         }
         .avatar{
-            max-width: 32px;
+            max-width: 36px;
             border-radius: 100%;
             vertical-align: middle;
         }
@@ -212,7 +320,7 @@ img{
         font-size: 12px;
     }
 
-}
+
 @import 'mainHome';
 
 @import 'theme';
