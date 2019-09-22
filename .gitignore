@@ -8,3 +8,5 @@ package-lock.json
 attachments/
 *.sql
 *.css
+.vscode
+scripts

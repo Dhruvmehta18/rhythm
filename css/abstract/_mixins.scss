@@ -1,0 +1,32 @@
+@mixin overflow($x:auto,$y:auto) {
+    overflow-x: $x;
+    overflow-y: $y;
+}
+@mixin border($w:1px,$c:black,$t:solid) {
+    border :$w $t $c;
+}
+@mixin margin($t:0,$l:0,$b:0,$r:0) {
+    margin: $t $l $b $r;
+}
+@mixin padding($t:0,$l:0,$b:0,$r:0) {
+    padding: $t $l $b $r;
+}
+@mixin reset {
+    @include margin();
+    @include padding();
+}
+@mixin bgtext($bg:white,$text:black) {
+    background-color: $bg;
+    color: $text;
+}
+@mixin background($url,$color) {
+    background-image: url($url);
+    @include bgtext($primary);
+}
+@mixin width-height($w:100%,$h:100%) {
+    width:$w;
+    height:$h;
+}
+@mixin transition($t:0.1){
+    transition: $t;
+}

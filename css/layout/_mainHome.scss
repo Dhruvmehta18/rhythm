@@ -1,0 +1,31 @@
+.root{
+    #main-home-container{
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+    .main-home{
+    padding-top: 108px;
+    .section{
+        display: flex;
+        flex-wrap: wrap;
+        .card{
+            width:180px;
+            .card-image{
+                padding-top: 125%;
+                position: relative;
+                margin: 16px;
+                img{
+                    position: absolute;
+                    margin: auto;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    max-width: 100%;
+                    max-height: 100%;
+                    vertical-align: top;
+                }
+            }
+        }
+    }
+}}

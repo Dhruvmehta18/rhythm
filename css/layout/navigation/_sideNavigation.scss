@@ -1,0 +1,28 @@
+#side-navigation{
+    display: block;
+    width: 200px;
+    position: fixed;
+    top:60px;
+    left:0;
+    height: 100%;
+    z-index:30;
+    float: left;
+    clear: both;
+    .top-nav-link li.link-container{
+        width: 100%;
+    }
+    .main-menu-container{
+        width: inherit;
+        height: inherit;
+        .side-nav{
+            width: 100%;
+            height: auto;
+            justify-content: flex-start;
+            >li.link-container{
+                width: 100%;
+                height: auto;
+                align-items: flex-start;
+            }
+        }
+    }
+}

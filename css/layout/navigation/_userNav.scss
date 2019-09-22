@@ -1,0 +1,19 @@
+#user-nav {
+    margin-left: auto;
+    font-size: .75rem;
+    .menu-after-login-container{
+        font-size: inherit;
+        height: 60px;
+        transition: height .3s;
+        transition-delay: .2s;
+    }
+    ul{
+        li.focus>ul{
+            right: 0;
+        }
+        ul {
+            display: block!important;
+        }
+        
+    }
+}

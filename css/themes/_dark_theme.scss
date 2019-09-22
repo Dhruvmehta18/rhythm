@@ -1,0 +1,72 @@
+@import 'color';
+.dark{
+    color:#ffffff;
+    background-color: $primary-dark;
+    #header-search-form{
+            .search-form{
+                background-color: rgba(241, 243, 244, 0.08);
+            }
+    }
+    nav.navbar-bottom{
+        background-color: $primary;
+        box-shadow: none;
+        border-bottom: 1px solid rgba(100,110,120,.15);
+    }
+    .main-home{
+        background-color: $primary;
+    }
+    header.navbar-header{
+        background-color: $primary-dark;
+        .link-container:hover > a{
+            color: rgba(255,255,255,1);
+            transition: color 0.3s;
+        }
+        .sub-menu{
+            background-color: #ffffff;
+            color: #424242;
+            border-radius: 4px;
+            >li:hover{
+                background-color: #eeeeee;
+                transition: background-color 0.1s;
+            }
+            >li:active{
+                background-color: #bcbcbc;
+                transition: background-color 0.5s;
+            }
+        }
+    }
+}
+.page-header{
+    box-shadow: 0 1px 2px rgba(25,25,25,.1);
+}
+#side-navigation{
+    background-color: inherit;
+}
+::-webkit-scrollbar {
+    background-color:#fff;
+    width:16px;
+}
+
+/* background of the scrollbar except button or resizer */
+::-webkit-scrollbar-track {
+    background-color: $primary;
+}
+::-webkit-scrollbar-track:hover {
+    background-color:$primary;
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+    background-color:$primary-light;
+    opacity: 0.5;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color:#a0a0a5;
+}
+
+/* set button(top and bottom of the scrollbar) */
+::-webkit-scrollbar-button {display:none;}
+
+  ::-webkit-resizer{
+      display: none;
+  }
