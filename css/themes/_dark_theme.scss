@@ -70,3 +70,6 @@
   ::-webkit-resizer{
       display: none;
   }
+.music-controller-container #music-controller{
+    background-color: lighten($color: $primary, $amount: 30%);
+}
