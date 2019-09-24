@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     margin: 16px;
-    
+    background-color: lighten($color: $primary, $amount: 20);
     .container{
         float: left;
         width: 100%;
@@ -18,19 +18,13 @@
             width: 100%;
             max-width: 400px;
             margin: auto;
-            overflow: hidden;
-            :hover .content-overlay{
-                opacity: 1;
-            }
-            :hover .content-details{
-                top: 50%;
-                left: 50%;
-                opacity: 1;
-            }
+            padding-top: 100%;
+            
             .content-overlay {
+                z-index: 10;
                 background: rgba(0,0,0,0.4);
                 position: absolute;
-                height: 99%;
+                height: 100%;
                 width: 100%;
                 left: 0;
                 top: 0;
@@ -42,7 +36,16 @@
                 transition: all 0.4s ease-in-out 0s;
             }
             .content-image{
-                width: 100%;
+                position: absolute;
+                margin: auto;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                max-width: 100%;
+                max-height: 100%;
+                min-width: 100%;
+                vertical-align: top;
             }
             .content-details {
                 position: absolute;
@@ -89,13 +92,33 @@
                             border: none;
                         }
                     }
+                    .more-button{
+                        display: block;
+                        position: relative;
+                        overflow: visible;
+                        ul{
+                            position: absolute;
+                            left: 36px;
+                            z-index: 100;
+                            top: 0;
+}
+                        }
+                    }
                 }
             }
             .fadeIn-bottom{
                 top: 90%;
             }
         }
-    
+        .content:hover .content-overlay{
+            opacity: 1;
+        }
+        .content:hover .content-details{
+            top: 50%;
+            left: 50%;
+            opacity: 1;
+            z-index: 10;
+        }
     }
     @media screen and (max-width: 640px){
         .container{
@@ -109,4 +132,3 @@
         width: 100%;
         }
     }
-}
