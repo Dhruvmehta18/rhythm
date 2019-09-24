@@ -95,10 +95,9 @@
 }
 .navbar-bottom{
     z-index: 1;
-    position: fixed;
-    top: 56px;
-    width: inherit;
     height: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 12px;
     .bottom-nav-container{

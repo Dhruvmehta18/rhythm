@@ -1,0 +1,112 @@
+.card{
+    width:180px;
+    display: flex;
+    flex-direction: column;
+    margin: 16px;
+    
+    .container{
+        float: left;
+        width: 100%;
+        .title{
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 10px;
+        }
+        
+        .content {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            overflow: hidden;
+            :hover .content-overlay{
+                opacity: 1;
+            }
+            :hover .content-details{
+                top: 50%;
+                left: 50%;
+                opacity: 1;
+            }
+            .content-overlay {
+                background: rgba(0,0,0,0.4);
+                position: absolute;
+                height: 99%;
+                width: 100%;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                opacity: 0;
+                -webkit-transition: all 0.4s ease-in-out 0s;
+                -moz-transition: all 0.4s ease-in-out 0s;
+                transition: all 0.4s ease-in-out 0s;
+            }
+            .content-image{
+                width: 100%;
+            }
+            .content-details {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                padding-left: 1em;
+                padding-right: 1em;
+                width: 100%;
+                top: 30%;
+                left: 50%;
+                opacity: 0;
+                -webkit-transform: translate(-50%, -100%);
+                -moz-transform: translate(-50%, -100%);
+                transform: translate(-50%, -100%);
+                -webkit-transition: all 0.3s ease-in-out 0s;
+                -moz-transition: all 0.3s ease-in-out 0s;
+                transition: all 0.3s ease-in-out 0s;
+                h3.content-title{
+                    color: #fff;
+                    font-weight: 500;
+                    letter-spacing: 0.05em;
+                    max-height: 64px;
+                    min-height: auto;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                p.content-text{
+                    max-height: 54px;
+                    color: #fff;
+                    font-size: 0.8em;
+                    padding: 0;
+                    min-height: auto;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .card-music-controls-container{
+                    display: flex;
+                    width:inherit;
+                    justify-self: flex-end;
+                    justify-content: space-between;
+                    .card-music-control-button-container{
+                        button{
+                            background: inherit;
+                            border: none;
+                        }
+                    }
+                }
+            }
+            .fadeIn-bottom{
+                top: 90%;
+            }
+        }
+    
+    }
+    @media screen and (max-width: 640px){
+        .container{
+        display: block;
+        width: 100%;
+        }
+    }
+    
+    @media screen and (min-width: 900px){
+        .container{
+        width: 100%;
+        }
+    }
+}
