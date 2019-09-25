@@ -90,6 +90,19 @@
             button {
               background: inherit;
               border: none;
+              }
+              ul{
+                li{  
+                a{
+                border-radius: 50%;
+                box-sizing: inherit;
+                display: block!important;
+                font-size: 0.85rem;
+                color:black;
+                background: white;
+                }
+              }
+              }
             }
           }
           .more-button {
@@ -101,6 +114,7 @@
               left: 36px;
               z-index: 100;
               top: 0;
+              
             }
           }
         }
