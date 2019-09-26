@@ -1,0 +1,67 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:500);
+
+$primary-color: #2ecc71;
+
+.volume-container{
+	display: inline-flex;
+	flex-wrap: nowrap;
+	width: auto;
+	justify-content: center;
+	align-items: center;
+
+#volume-slider-container {
+	width: auto;
+	position: relative;
+	margin: 0 auto;
+	i {
+		position: absolute;
+		margin-top: -6px;
+		color: #666;
+	}
+	
+	i.fa-volume-down {
+		margin-left: -8px;
+	}
+	
+	i.fa-volume-up {
+		margin-right: -8px;
+		right: 0;
+	}
+}
+
+#volume {
+	height: 5px;
+	width: 100px;
+	background: #555;
+	border-radius: 15px;
+	
+	.ui-slider-range-min {
+		height: 5px;
+		width: 100px;
+		position: absolute;
+		background: lighten($color: #fff, $amount: 10);
+		border: none;
+		border-radius: 10px;
+		outline: none;
+	}
+	
+	.ui-slider-handle {
+		width: 12px;
+  		height: 12px;
+		border-radius: 50%;
+		margin:-3px 0 0 -8px;
+		background: #FFF;
+		position: absolute;
+		cursor: pointer;
+		outline: none;
+		display: none;
+	}
+}
+#volume:hover .ui-slider-range-min{
+	background-color: $primary-color;
+	border-radius: 10px 0 0 10px;
+}
+#volume:hover .ui-slider-handle{
+	display: block;
+}
+}
