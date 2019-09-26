@@ -53,22 +53,55 @@
                     #time-controller-container{
                         display: flex;
                         align-items: center;
+                        width: 100%;
                         $border-radius:36px;
                         $progress-height:4px;
-                        #time-progress{
+                        #time-progress {
+                            
+                            $primary-color: #2ecc71;
                             width: 100%;
-                            height: $progress-height;
-                            background-color: lighten($color: $primary, $amount: 45);
-                            border-radius: $border-radius;
-                            overflow: hidden;
-                            #time-progress-bar{
-                                width: 10%;
-                                height: $progress-height;
-                                background-color: lighten($color: #ffffff, $amount: 80);
-                                border-radius: $border-radius;
+                            position: relative;
+                            margin: 0 auto;
+                        #time-progress-bar{
+                            height: 5px;
+                            width: 100%;
+                            background: #555;
+                            border-radius: 15px;
+                            
+                            .ui-slider-range-min {
+                                height: 5px;
+                                width: auto;
+                                position: absolute;
+                                background: lighten($color: #fff, $amount: 10);
+                                border: none;
+                                border-radius: 10px;
+                                outline: none;
+                            }
+                            
+                            .ui-slider-handle {
+                                width: 12px;
+                                height: 12px;
+                                border-radius: 50%;
+                                margin:-3px 0 0 -8px;
+                                background: #FFF;
+                                position: absolute;
+                                cursor: pointer;
+                                outline: none;
+                                display: none;
                             }
                         }
+                        #time-progress-bar:hover .ui-slider-range-min{
+                            background-color: $primary-color;
+                            border-radius: 10px 0 0 10px;
+                        }
+                        #time-progress-bar:hover .ui-slider-handle{
+                            display: block;
+                        }
+                        }
                     }
+                    
+                    
+                    
                     .audio-time {
                         display: inline;
                         padding: 4px;
@@ -77,14 +110,13 @@
                         }
                     }
                 }
-                .time-controller:hover #time-progress-bar{
-                        background-color: green !important;
-                }
             }
             .controller-3{
                 margin: auto 8px;
                 .music-settings{
+                    display: inline-flex;
                     .settings-container{
+                        display: flex;
                     }
                 }
                
