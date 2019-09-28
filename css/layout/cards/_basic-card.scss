@@ -101,7 +101,15 @@
                           left: 36px;
                           z-index: 100;
                           top: 0;
-}
+                          background-color: lighten($color: $primary, $amount: 20);
+                          display: none;
+                          >li{
+                              padding: 8px;
+                              &:hover{
+                                background-color: lighten($color: $primary, $amount: 30);
+                              }
+                          }
+                        }
                       }
                   }
               }
