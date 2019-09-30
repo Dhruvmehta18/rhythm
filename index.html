@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
-        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-        type="text/css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
     <title>Rhythm</title>
-</head>
+  </head>
 
-<body class="dark">
+  <body class="dark">
     <div class="root">
-        <header class="navbar-header">
-            <div class="navbar-container">
-                <div class="navbar-top">
-                    <div class="brand">
-                        <p class="brand-name">Rhythm</p>
-                    </div>
-                    <form id="header-search-form">
-                        <span class="search-form">
-                            <input type="search" name="search-hint" id="input-search-hint" value="" placeholder=""
-                                readonly autocomplete="off" spellcheck="false" tabindex="-1" dir="auto">
+      <header class="navbar-header">
+        <div class="navbar-container">
+          <div class="navbar-top">
+            <div class="brand">
+              <p class="brand-name">Rhythm</p>
+            </div>
+            <form id="header-search-form">
+              <span class="search-form">
+                <input
+                  type="search"
+                  name="search-hint"
+                  id="input-search-hint"
+                  value=""
+                  placeholder=""
+                  readonly
+                  autocomplete="off"
+                  spellcheck="false"
+                  tabindex="-1"
+                  dir="auto"
+                />
 
-                            <label class="material-icons line-height" id="main-search-icon">search</label>
-                            <input type="search" value="" class="input" id="header-search-input" placeholder="Search"
-                                autocomplete="off" spellcheck="false" dir="auto" />
-                            <pre aria-hidden="true" style="position: absolute;
+                <label class="material-icons line-height" id="main-search-icon">search</label>
+                <input
+                  type="search"
+                  value=""
+                  class="input"
+                  id="header-search-input"
+                  placeholder="Search"
+                  autocomplete="off"
+                  spellcheck="false"
+                  dir="auto"
+                />
+                <pre
+                  aria-hidden="true"
+                  style="position: absolute;
                             visibility: hidden;
                             white-space: pre;
                             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif;
@@ -40,359 +61,374 @@
                             letter-spacing: 0px;
                             text-indent: 0px;
                             text-rendering: auto;
-                            text-transform: none;">k</pre>
-                            <div class="dropdown-menu"></div>
-                        </span>
-                        </label>
-                    </form>
-                    <nav id="user-nav" class="main-navigation">
-                        <div class="menu-after-login-container">
-                            <ul id="menu-after-login" class="user-menu nav">
-                                <li class="menu-item menu-item menu-avatar">
-                                    <a href="">
-                                        <span id="user-display-name">User</span>
-                                        <img src="image/song.jpg" alt="profile image" class="avatar"
-                                            style="width: 36px;height: 36px;" />
-                                    </a>
-                                    <ul class="sub-menu" style="min-width:100px;">
-                                        <li>
-                                            <a href="#">hello</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">lid</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">sids</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div>
-            <nav class="main-navigation" id="side-navigation">
-                <div class="main-menu-container">
-                    <ul class="side-nav nav">
-                        <li class="link-container"><a href="#" class="link"><i class="material-icons" style="float:left;">home</i>Home</a>
-                        </li><li class="link-container"><a href="#" class="link"><i class="material-icons">
-                                list
-                                </i>Library</a></li>
-                        <li class="link-container">
-                            <a href="#" class="link">
-                                Setting
-                            </a>
-                        </li>
+                            text-transform: none;"
+                >
+k</pre
+                >
+                <div class="dropdown-menu"></div>
+              </span>
+            </form>
+            <nav id="user-nav" class="main-navigation">
+              <div class="menu-after-login-container">
+                <ul id="menu-after-login" class="user-menu nav">
+                  <li class="menu-item menu-item menu-avatar">
+                    <a href="">
+                      <span id="user-display-name">User</span>
+                      <img src="image/song.jpg" alt="profile image" class="avatar" style="width: 36px;height: 36px;" />
+                    </a>
+                    <ul class="sub-menu" style="min-width:100px;">
+                      <li>
+                        <a href="#">hello</a>
+                      </li>
+                      <li>
+                        <a href="#">lid</a>
+                      </li>
+                      <li>
+                        <a href="#">sids</a>
+                      </li>
                     </ul>
-                </<i>
+                  </li>
+                </ul>
+              </div>
             </nav>
-            <div id="main-home-container">
-                <nav class="navbar-bottom page-header">
-                    <div class="bottom-nav-container">
-                        <ul class="bottom-nav-link">
-                            <li class="link-container"><a href="#" class="link">Featured</a></li>
-                            <li class="link-container"><a href="#" class="link">New Releases</a></li>
-                            <li class="link-container"><a href="#" class="link">Discover</a></li>
-                            <li class="link-container"><a href="#" class="link">Podcasts</a></li>
-                            <li class="link-container"><a href="#" class="link">Charts</a></li>
-                        </ul>
-                    </div>
-                </nav>
-                <div class="main-home">
-                    <div class="section">
-                        <div class="card">
-                            <div class="container">
-                                <div class="content">
-                                    <div class="content-overlay"></div>
-                                    <img class="content-image" src="image/song.jpg">
-                                    <div class="content-details fadeIn-bottom">
-                                        <h3 class="content-title">This is a title </h3>
-                                        <p class="content-text">This is a short description</p>
-                                        <div class="card-music-controls-container">
-                                            <div class="card-music-control-button-container">
-                                                <button><i
-                                                        class="material-icons-round svg-icon controller-icons">favorite_border</i></button>
-                                            </div>
-                                            <div class="card-music-control-button-container">
-                                                <button><i
-                                                        class="material-icons-round svg-icon controller-icons">play_circle_outline</i></button>
-                                            </div>
-                                            <div class="card-music-control-button-container more-button">
-                                                <button><i
-                                                        class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
-                                                <ul class="sub-menu" style="min-width:100px;">
-                                                    <li>
-                                                        <a href="#">Download</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">lid</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-basic-data">
-                                <a href="#" class="card-heading">Slow down</a>
-                                <a href="#" class="card-subHeading">Arijit singh</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="container">
-                                <div class="content">
-                                    <a href="image/song.jpg" target="_blank">
-                                        <div class="content-overlay"></div>
-                                        <img class="content-image" src="image/song.jpg">
-                                        <div class="content-details fadeIn-bottom">
-                                            <h3 class="content-title">This is a title </h3>
-                                            <p class="content-text">This is a short description</p>
-                                            <div class="card-music-controls-container">
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">favorite_border</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">play_circle_outline</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-basic-data">
-                                <a href="#" class="card-heading">Slow down</a>
-                                <a href="#" class="card-subHeading">Arijit singh</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section">
-                        <div class="card">
-                            <div class="container">
-                                <div class="content">
-                                    <a href="image/song.jpg" target="_blank">
-                                        <div class="content-overlay"></div>
-                                        <img class="content-image" src="image/song.jpg">
-                                        <div class="content-details fadeIn-bottom">
-                                            <h3 class="content-title">This is a title </h3>
-                                            <p class="content-text">This is a short description</p>
-                                            <div class="card-music-controls-container">
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">favorite_border</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">play_circle_outline</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-basic-data">
-                                <a href="#" class="card-heading">Slow down</a>
-                                <a href="#" class="card-subHeading">Arijit singh</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section">
-                        <div class="card">
-                            <div class="container">
-                                <div class="content">
-                                    <a href="image/song.jpg" target="_blank">
-                                        <div class="content-overlay"></div>
-                                        <img class="content-image" src="image/song.jpg">
-                                        <div class="content-details fadeIn-bottom">
-                                            <h3 class="content-title">This is a title </h3>
-                                            <p class="content-text">This is a short description</p>
-                                            <div class="card-music-controls-container">
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">favorite_border</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">play_circle_outline</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-basic-data">
-                                <a href="#" class="card-heading">Slow down</a>
-                                <a href="#" class="card-subHeading">Arijit singh</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section">
-                        <div class="card">
-                            <div class="container">
-                                <div class="content">
-                                    <a href="image/song.jpg" target="_blank">
-                                        <div class="content-overlay"></div>
-                                        <img class="content-image" src="image/song.jpg">
-                                        <div class="content-details fadeIn-bottom">
-                                            <h3 class="content-title">This is a title </h3>
-                                            <p class="content-text">This is a short description</p>
-                                            <div class="card-music-controls-container">
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">favorite_border</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">play_circle_outline</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-basic-data">
-                                <a href="#" class="card-heading">Slow down</a>
-                                <a href="#" class="card-subHeading">Arijit singh</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section">
-                        <div class="card">
-                            <div class="container">
-                                <div class="content">
-                                    <a href="image/song.jpg" target="_blank">
-                                        <div class="content-overlay"></div>
-                                        <img class="content-image" src="image/song.jpg">
-                                        <div class="content-details fadeIn-bottom">
-                                            <h3 class="content-title">This is a title </h3>
-                                            <p class="content-text">This is a short description</p>
-                                            <div class="card-music-controls-container">
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">favorite_border</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">play_circle_outline</i></button>
-                                                </div>
-                                                <div class="card-music-control-button-container">
-                                                    <button><i
-                                                            class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-basic-data">
-                                <a href="#" class="card-heading">Slow down</a>
-                                <a href="#" class="card-subHeading">Arijit singh</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="music-controller-container">
-                <div id="music-controller">
-                    <div class="controller-1">
-                        <div class="song-image">
-                            <img src="image//song.jpg" alt="song" srcset="">
-                        </div>
-                        <div class="data">
-                            <a href="#" class="card-heading">Slow down</a>
-                            <a href="#" class="card-subHeading">Arijit singh</a>
-                        </div>
-                        <div class="like">
-                            <i class="material-icons-round svg-icon controller-icons">favorite_border</i>
-                        </div>
-                    </div>
-                    <div class="controller-2">
-                        <div class="player-controller">
-                            <div class="player-control-button">
-                                <button class="control-button"><i class="material-icons-round">shuffle</i></button>
-                            </div>
-                            <div class="player-control-button">
-                                <button class="control-button"><i
-                                        class="material-icons-round">skip_previous</i></button>
-                            </div>
-                            <div class="player-control-button">
-                                <button class="control-button" id="play-button" data-playing="false" role="switch"
-                                    aria-checked="false"><i
-                                        class="material-icons-round">play_circle_outline</i></button>
-                            </div>
-                            <div class="player-control-button">
-                                <button class="control-button"> <i class="material-icons-round">skip_next</i></button>
-                            </div>
-                            <div class="player-control-button">
-                                <button class="control-button"><i class="material-icons-round">repeat</i></button>
-                            </div>
-                        </div>
-                        <div class="time-controller">
-                            <audio id="music_player" crossorigin="anonymous">
-                                <source src="song.mp3" />
-                            </audio>
-                            <div id="time-controller-container">
-                                <div class="audio-time">
-                                    <p id="start-time">0:00</p>
-                                </div>
-                                <div id="time-progress">
-                                    <div id="time-progress-bar"></div>
-                                </div>
-                                <div class="audio-time">
-                                    <p id="end-time">0:00</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="controller-3">
-                        <div class="music-settings">
-                            <div class="settings-container">
-                                <i class="material-icons-round controller-icons">queue_music</i>
-                            </div>
-                            <div class="volume-container">
-                                <i class="material-icons-round controller-icons">volume_up</i>
-                                <div id="volume-slider-container">
-                                    <div id="volume"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div> <!-- footer -->
-    <div class="reference">
-        <ul>
-            <li>
-                <a href="#">HELLO</a>
-            </li>
-        </ul>
+      </header>
+      <div>
+        <nav class="main-navigation" id="side-navigation">
+          <div class="main-menu-container">
+            <ul class="side-nav nav">
+              <li class="link-container">
+                <a href="#" class="link"><i class="material-icons" style="float:left;">home</i>Home</a>
+              </li>
+              <li class="link-container">
+                <a href="#" class="link"
+                  ><i class="material-icons">
+                    list </i
+                  >Library</a
+                >
+              </li>
+              <li class="link-container">
+                <a href="#" class="link">
+                  Setting
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div id="main-home-container">
+          <nav class="navbar-bottom page-header">
+            <div class="bottom-nav-container">
+              <ul class="bottom-nav-link">
+                <li class="link-container"><a href="#" class="link">Featured</a></li>
+                <li class="link-container"><a href="#" class="link">New Releases</a></li>
+                <li class="link-container"><a href="#" class="link">Discover</a></li>
+                <li class="link-container"><a href="#" class="link">Podcasts</a></li>
+                <li class="link-container"><a href="#" class="link">Charts</a></li>
+              </ul>
+            </div>
+          </nav>
+          <div class="main-home">
+            <div class="section">
+              <div class="card">
+                <div class="container">
+                  <div class="content">
+                    <div class="content-overlay"></div>
+                    <img class="content-image" src="image/song.jpg" />
+                    <div class="content-details fadeIn-bottom">
+                      <h3 class="content-title">This is a title</h3>
+                      <p class="content-text">This is a short description</p>
+                      <div class="card-music-controls-container">
+                        <div class="card-music-control-button-container">
+                          <button><i class="material-icons-round svg-icon controller-icons">favorite_border</i></button>
+                        </div>
+                        <div class="card-music-control-button-container">
+                          <button>
+                            <i class="material-icons-round svg-icon controller-icons">play_circle_outline</i>
+                          </button>
+                        </div>
+                        <div class="card-music-control-button-container more-button">
+                          <button><i class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
+                          <ul class="sub-menu" style="min-width:100px;">
+                            <li>
+                              <a href="#">Download</a>
+                            </li>
+                            <li>
+                              <a href="#">lid</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-basic-data">
+                  <a href="#" class="card-heading">Slow down</a>
+                  <a href="#" class="card-subHeading">Arijit singh</a>
+                </div>
+              </div>
+              <div class="card">
+                <div class="container">
+                  <div class="content">
+                    <a href="image/song.jpg" target="_blank">
+                      <div class="content-overlay"></div>
+                      <img class="content-image" src="image/song.jpg" />
+                      <div class="content-details fadeIn-bottom">
+                        <h3 class="content-title">This is a title</h3>
+                        <p class="content-text">This is a short description</p>
+                        <div class="card-music-controls-container">
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">favorite_border</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">play_circle_outline</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button><i class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-basic-data">
+                  <a href="#" class="card-heading">Slow down</a>
+                  <a href="#" class="card-subHeading">Arijit singh</a>
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="card">
+                <div class="container">
+                  <div class="content">
+                    <a href="image/song.jpg" target="_blank">
+                      <div class="content-overlay"></div>
+                      <img class="content-image" src="image/song.jpg" />
+                      <div class="content-details fadeIn-bottom">
+                        <h3 class="content-title">This is a title</h3>
+                        <p class="content-text">This is a short description</p>
+                        <div class="card-music-controls-container">
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">favorite_border</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">play_circle_outline</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button><i class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-basic-data">
+                  <a href="#" class="card-heading">Slow down</a>
+                  <a href="#" class="card-subHeading">Arijit singh</a>
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="card">
+                <div class="container">
+                  <div class="content">
+                    <a href="image/song.jpg" target="_blank">
+                      <div class="content-overlay"></div>
+                      <img class="content-image" src="image/song.jpg" />
+                      <div class="content-details fadeIn-bottom">
+                        <h3 class="content-title">This is a title</h3>
+                        <p class="content-text">This is a short description</p>
+                        <div class="card-music-controls-container">
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">favorite_border</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">play_circle_outline</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button><i class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-basic-data">
+                  <a href="#" class="card-heading">Slow down</a>
+                  <a href="#" class="card-subHeading">Arijit singh</a>
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="card">
+                <div class="container">
+                  <div class="content">
+                    <a href="image/song.jpg" target="_blank">
+                      <div class="content-overlay"></div>
+                      <img class="content-image" src="image/song.jpg" />
+                      <div class="content-details fadeIn-bottom">
+                        <h3 class="content-title">This is a title</h3>
+                        <p class="content-text">This is a short description</p>
+                        <div class="card-music-controls-container">
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">favorite_border</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">play_circle_outline</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button><i class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-basic-data">
+                  <a href="#" class="card-heading">Slow down</a>
+                  <a href="#" class="card-subHeading">Arijit singh</a>
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <div class="card">
+                <div class="container">
+                  <div class="content">
+                    <a href="image/song.jpg" target="_blank">
+                      <div class="content-overlay"></div>
+                      <img class="content-image" src="image/song.jpg" />
+                      <div class="content-details fadeIn-bottom">
+                        <h3 class="content-title">This is a title</h3>
+                        <p class="content-text">This is a short description</p>
+                        <div class="card-music-controls-container">
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">favorite_border</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button>
+                              <i class="material-icons-round svg-icon controller-icons">play_circle_outline</i>
+                            </button>
+                          </div>
+                          <div class="card-music-control-button-container">
+                            <button><i class="material-icons-round svg-icon controller-icons">more_horiz</i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-basic-data">
+                  <a href="#" class="card-heading">Slow down</a>
+                  <a href="#" class="card-subHeading">Arijit singh</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="music-controller-container">
+          <div id="music-controller">
+            <div class="controller-1">
+              <div class="song-image">
+                <img src="image//song.jpg" alt="song" srcset="" />
+              </div>
+              <div class="data">
+                <a href="#" class="card-heading">Slow down</a>
+                <a href="#" class="card-subHeading">Arijit singh</a>
+              </div>
+              <div class="like">
+                <i class="material-icons-round svg-icon controller-icons">favorite_border</i>
+              </div>
+            </div>
+            <div class="controller-2">
+              <div class="player-controller">
+                <div class="player-control-button">
+                  <button class="control-button"><i class="material-icons-round">shuffle</i></button>
+                </div>
+                <div class="player-control-button">
+                  <button class="control-button"><i class="material-icons-round">skip_previous</i></button>
+                </div>
+                <div class="player-control-button">
+                  <button
+                    class="control-button"
+                    id="play-button"
+                    data-playing="false"
+                    role="switch"
+                    aria-checked="false"
+                  >
+                    <i class="material-icons-round">play_circle_outline</i>
+                  </button>
+                </div>
+                <div class="player-control-button">
+                  <button class="control-button"><i class="material-icons-round">skip_next</i></button>
+                </div>
+                <div class="player-control-button">
+                  <button class="control-button"><i class="material-icons-round">repeat</i></button>
+                </div>
+              </div>
+              <div class="time-controller">
+                <audio id="music_player" crossorigin="anonymous">
+                  <source src="song.mp3" />
+                </audio>
+                <div id="time-controller-container">
+                  <div class="audio-time">
+                    <p id="start-time">0:00</p>
+                  </div>
+                  <div id="time-progress">
+                    <div id="time-progress-bar"></div>
+                  </div>
+                  <div class="audio-time">
+                    <p id="end-time">0:00</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="controller-3">
+              <div class="music-settings">
+                <div class="settings-container">
+                  <i class="material-icons-round controller-icons">queue_music</i>
+                </div>
+                <div class="volume-container">
+                  <i class="material-icons-round controller-icons">volume_up</i>
+                  <div id="volume-slider-container">
+                    <div id="volume"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+    <!-- footer -->
+    <div class="reference">
+      <ul>
+        <li>
+          <a href="#">HELLO</a>
+        </li>
+      </ul>
+    </div>
+  </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 </html>

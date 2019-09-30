@@ -1,142 +1,142 @@
-.card{
-  width:180px;
+.card {
+  width: 180px;
   display: flex;
   flex-direction: column;
   margin: 16px;
   background-color: lighten($color: $primary, $amount: 20);
-  .container{
-      float: left;
-      width: 100%;
-      .title{
+  .container {
+    float: left;
+    width: 100%;
+    .title {
       color: #1a1a1a;
       text-align: center;
       margin-bottom: 10px;
-      }
-      
-      .content {
-          position: relative;
-          width: 100%;
-          max-width: 400px;
-          margin: auto;
-          padding-top: 100%;
-          
-          .content-overlay {
-              z-index: 10;
-              background: rgba(0,0,0,0.4);
-              position: absolute;
-              height: 100%;
-              width: 100%;
-              left: 0;
-              top: 0;
-              bottom: 0;
-              right: 0;
-              opacity: 0;
-              -webkit-transition: all 0.4s ease-in-out 0s;
-              -moz-transition: all 0.4s ease-in-out 0s;
-              transition: all 0.4s ease-in-out 0s;
-          }
-          .content-image{
-              position: absolute;
-              margin: auto;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              max-width: 100%;
-              max-height: 100%;
-              min-width: 100%;
-              vertical-align: top;
-          }
-          .content-details {
-              position: absolute;
-              display: flex;
-              flex-direction: column;
-              padding-left: 1em;
-              padding-right: 1em;
-              width: 100%;
-              top: 30%;
-              left: 50%;
-              opacity: 0;
-              -webkit-transform: translate(-50%, -100%);
-              -moz-transform: translate(-50%, -100%);
-              transform: translate(-50%, -100%);
-              -webkit-transition: all 0.3s ease-in-out 0s;
-              -moz-transition: all 0.3s ease-in-out 0s;
-              transition: all 0.3s ease-in-out 0s;
-              h3.content-title{
-                  color: #fff;
-                  font-weight: 500;
-                  letter-spacing: 0.05em;
-                  max-height: 64px;
-                  min-height: auto;
-                  text-overflow: ellipsis;
-                  white-space: nowrap;
-              }
-              p.content-text{
-                  max-height: 54px;
-                  color: #fff;
-                  font-size: 0.8em;
-                  padding: 0;
-                  min-height: auto;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-              }
-              .card-music-controls-container{
-                  display: flex;
-                  width:inherit;
-                  justify-self: flex-end;
-                  justify-content: space-between;
-                  .card-music-control-button-container{
-                      button{
-                          background: inherit;
-                          border: none;
-                      }
-                  }
-                  .more-button{
-                      display: block;
-                      position: relative;
-                      overflow: visible;
-                      ul{
-                          position: absolute;
-                          left: 36px;
-                          z-index: 100;
-                          top: 0;
-                          background-color: lighten($color: $primary, $amount: 20);
-                          display: none;
-                          >li{
-                              padding: 8px;
-                              &:hover{
-                                background-color: lighten($color: $primary, $amount: 30);
-                              }
-                          }
-                        }
-                      }
-                  }
-              }
-          }
-          .fadeIn-bottom{
-              top: 90%;
-          }
-      }
-      .content:hover .content-overlay{
-          opacity: 1;
-      }
-      .content:hover .content-details{
-          top: 50%;
-          left: 50%;
-          opacity: 1;
-          z-index: 10;
-      }
-  }
-  @media screen and (max-width: 640px){
-      .container{
-      display: block;
+    }
+
+    .content {
+      position: relative;
       width: 100%;
+      max-width: 400px;
+      margin: auto;
+      padding-top: 100%;
+
+      .content-overlay {
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.4);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        -webkit-transition: all 0.4s ease-in-out 0s;
+        -moz-transition: all 0.4s ease-in-out 0s;
+        transition: all 0.4s ease-in-out 0s;
       }
-  }
-  
-  @media screen and (min-width: 900px){
-      .container{
-      width: 100%;
+      .content-image {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        max-height: 100%;
+        min-width: 100%;
+        vertical-align: top;
       }
+      .content-details {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        padding-left: 1em;
+        padding-right: 1em;
+        width: 100%;
+        top: 30%;
+        left: 50%;
+        opacity: 0;
+        -webkit-transform: translate(-50%, -100%);
+        -moz-transform: translate(-50%, -100%);
+        transform: translate(-50%, -100%);
+        -webkit-transition: all 0.3s ease-in-out 0s;
+        -moz-transition: all 0.3s ease-in-out 0s;
+        transition: all 0.3s ease-in-out 0s;
+        h3.content-title {
+          color: #fff;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          max-height: 64px;
+          min-height: auto;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        p.content-text {
+          max-height: 54px;
+          color: #fff;
+          font-size: 0.8em;
+          padding: 0;
+          min-height: auto;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .card-music-controls-container {
+          display: flex;
+          width: inherit;
+          justify-self: flex-end;
+          justify-content: space-between;
+          .card-music-control-button-container {
+            button {
+              background: inherit;
+              border: none;
+            }
+          }
+          .more-button {
+            display: block;
+            position: relative;
+            overflow: visible;
+            ul {
+              position: absolute;
+              left: 36px;
+              z-index: 100;
+              top: 0;
+              background-color: lighten($color: $primary, $amount: 20);
+              display: none;
+              > li {
+                padding: 8px;
+                &:hover {
+                  background-color: lighten($color: $primary, $amount: 30);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .fadeIn-bottom {
+      top: 90%;
+    }
   }
+  .content:hover .content-overlay {
+    opacity: 1;
+  }
+  .content:hover .content-details {
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    z-index: 10;
+  }
+}
+@media screen and (max-width: 640px) {
+  .container {
+    display: block;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .container {
+    width: 100%;
+  }
+}

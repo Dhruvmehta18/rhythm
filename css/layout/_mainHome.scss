@@ -1,17 +1,17 @@
-.root{
-    #main-home-container{
-        margin-left: 200px;
-        width: calc(100% - 200px);
-        height: calc(100% - 160px);
-        position: fixed;
-        top: 60px;
+.root {
+  #main-home-container {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    height: calc(100% - 160px);
+    position: fixed;
+    top: 60px;
+  }
+  .main-home {
+    height: calc(100% - 54px);
+    overflow: auto;
+    .section {
+      display: flex;
+      flex-wrap: wrap;
     }
-    .main-home{
-        height: calc(100% - 54px);
-        overflow: auto;
-    .section{
-        display: flex;
-        flex-wrap: wrap;
-        
-    }
-}}
+  }
+}

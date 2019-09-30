@@ -1,9 +1,9 @@
 @import 'base/initialize';
-.root{
-    min-height: $full;
-    min-width: $full;
-    max-height: $full;
-    max-width: $full;
+.root {
+  min-height: $full;
+  min-width: $full;
+  max-height: $full;
+  max-width: $full;
 }
 
 @import 'themes/_index';
