@@ -1,0 +1,55 @@
+body{
+    background-color: black;
+    font-family: Arial;
+    color: white;
+}
+.user{
+    padding-left: 100px;
+    .image{
+        height:40%;
+        width: 30%;
+        max-width: 100%;
+        border-radius: 100%;
+        display: block;
+        margin-left: 25%;
+        margin-right: auto;
+        display: inline-block;
+    }
+
+    .field{
+        margin: 15px;
+    
+    }
+    .change-pic{
+        margin-left: 10px;
+        vertical-align: 100px;
+    }
+    .name{
+        margin: 20px;
+        color: white;
+        margin-left: 25%;
+    }
+    .last-name{
+        color: white;
+        margin-left: 15%;
+    }
+    .box{
+        height: 40px;
+        width: 515px;
+        border-radius: 10px;
+        color: white;
+        border-color: rgb(153, 146, 146);
+        background-color: black;
+        margin: 15px;
+        margin-left: 25%;
+    }
+    .save{
+        margin-left: 40%;
+    }
+    .name-box{
+        width: 20%;
+    }
+    .pos{
+        margin-left: 5px;
+    }
+}
