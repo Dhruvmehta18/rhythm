@@ -1,0 +1,104 @@
+$time:1s;
+.open-search {
+  animation: open $time cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.1s 1 normal;
+  -webkit-animation: open $time cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.1s 1 normal;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes open {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: calc(100% - 200px);
+  }
+}
+
+/* Standard syntax */
+@keyframes open {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: calc(100% - 200px);
+  }
+}
+.close-search {
+  animation: close $time cubic-bezier(0.4, 0, 1, 1) 0.2s 1 normal;
+  -webkit-animation: close $time cubic-bezier(0.4, 0, 1, 1) 0.2s 1 normal;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+@keyframes close {
+  0% {
+    width: calc(100% - 200px);
+    overflow: visible;
+  }
+  100% {
+    width: 0%;
+    overflow: hidden;
+  }
+}
+@-webkit-keyframes close {
+  0% {
+    width: calc(100% - 200px);
+  }
+  100% {
+    width: 0%;
+  }
+}
+.open-search-text{
+  animation: open-search-text 1s cubic-bezier(0, 1.21, 0.89, 0.95) 0.1s 1 normal;
+  -webkit-animation: open-search-text 1s cubic-bezier(0, 1.21, 0.89, 0.95) 0.1s 1 normal;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+@keyframes open-search-text {
+  0% {
+    right: 80px;
+  }
+  70%{
+    right:calc(100% - 30px);
+  }
+  100% {
+   right: 100%;
+  }
+}
+@-webkit-keyframes open-search-text {
+  0% {
+    right: 100px;
+  }
+  100% {
+   right: 100%;
+  }
+}
+.close-search-text{
+  animation: close-search-text 1s cubic-bezier(0.03, 0.15, 1, 0.49) 0.3s 1 normal;
+  -webkit-animation: close-search-text 1s cubic-bezier(0.03, 0.15, 1, 0.49) 0.3s 1 normal;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+@keyframes close-search-text {
+  0% {
+    right: 110%;
+  }
+  90%{
+    right: 150px;
+  }
+  100% {
+   right:-110%;
+  }
+}
+@-webkit-keyframes close-search-text {
+  0% {
+    right: 110%;
+  }
+  90%{
+    right: 80px;
+  }
+  100% {
+   right:-110px;
+  }
+}

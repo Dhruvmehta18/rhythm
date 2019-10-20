@@ -1,0 +1,27 @@
+.music-controller-container {
+  $widthHeight: 42px;
+  .player-control-button {
+    width: $widthHeight;
+    height: $widthHeight;
+    button.controller-button {
+      width: $widthHeight;
+      height: $widthHeight;
+      // margin: 0 4px;
+    }
+  }
+  button {
+    background-color: inherit;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    transition: all .1s ease-in-out;
+  }
+  button:hover {
+    background-color: lighten($color: $primary, $amount: 20);
+  }
+
+  button:active {
+    background-color: lighten($color: $primary, $amount: 15);
+    transform: scale(1.1);
+  }
+}

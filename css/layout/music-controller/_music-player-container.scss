@@ -24,7 +24,8 @@
           }
         }
 
-        .like {
+        .song-feedback {
+          display: inline-flex;
           margin: 16px;
         }
       }
@@ -34,17 +35,7 @@
         .player-controller {
           display: flex;
           justify-content: center;
-          .player-control-button {
-            margin: 4px 8px;
-            button.control-button {
-              background: inherit;
-              border: none;
-              i {
-                color: #ffffff;
-                font-size: 1.8rem;
-              }
-            }
-          }
+          align-items: center;
         }
         .time-controller {
           width: 100%;
@@ -112,12 +103,15 @@
         .music-settings {
           display: inline-flex;
           .settings-container {
-            display: flex;
+            width: auto;
+            height: auto;
+            button {
+              width: 34px;
+              height: 34px;
+              font-size: 24px;
+            }
           }
         }
-      }
-      .controller-icons {
-        font-size: 1.25rem;
       }
     }
   }

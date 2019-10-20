@@ -21,24 +21,30 @@
       color: rgba(255, 255, 255, 1);
       transition: color 0.3s;
     }
-    .sub-menu {
-      background-color: #ffffff;
-      color: #424242;
-      border-radius: 4px;
-      > li:hover {
-        background-color: #eeeeee;
-        transition: background-color 0.1s;
-      }
-      > li:active {
-        background-color: #bcbcbc;
-        transition: background-color 0.5s;
-      }
+  }
+  $subMenu: #242424;
+  .sub-menu {
+    background-color: $subMenu;
+    color: #ffffff;
+    box-shadow: 0px 0px 12px 8px #0000008f;
+    cursor: pointer;
+    > li:hover {
+      background-color: lighten($color: $subMenu, $amount: 10);
+      transition: background-color 0.1s ease-out;
+    }
+    > li:active {
+      background-color: lighten($color: $subMenu, $amount: 5);
+      transition: background-color 0.1s ease-out;
     }
   }
   i {
     color: #ffffff;
   }
+  .mat-ripple-element {
+    background-color: rgba($color: #fff, $alpha: 0.1);
+  }
 }
+
 .page-header {
   box-shadow: 0 1px 2px rgba(25, 25, 25, 0.1);
 }

@@ -1,8 +1,14 @@
 .sub-menu {
+  position: fixed;
+  z-index: 2000;
+  border-radius: 4px;
+  width: 200px;
+  padding: 16px 0;
   > li {
-    min-width: 100%;
+    padding: 8px 16px;
+    width: 100%;
     > a {
-      padding: 8px 4px;
+      padding: 8px 16px;
     }
   }
 }
