@@ -106,19 +106,21 @@
           .card-play-button-container {
             top: 40%;
             left: 40%;
-            opacity: 0.7;
             transition-property: opacity, transform;
             transition-duration: 0.1s;
             transition-timing-function: ease;
             &:hover {
-              opacity: 1;
               transform: scale(1.2);
             }
             .card-play-button {
-              background-color: $primary;
+              background-color: rgba($color: $primary, $alpha: 0.6);
               $playButtonSize: 44px;
               width: $playButtonSize;
               height: $playButtonSize;
+              transition: backqround-color 0.1s ease;
+              &:hover{
+                background-color: rgba($color: $primary, $alpha: 1);
+              }
               i {
                 font-size: 28px;
               }

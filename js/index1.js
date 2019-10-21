@@ -393,8 +393,10 @@ class Card {
   }
   getCardDOM() {
     function setAttributes(el, attrs) {
-      for (const key in attrs) {
-        el.setAttribute(key, attrs[key]);
+      if (typeof attrs !== 'undefined') {
+        for (const key in attrs) {
+          el.setAttribute(key, attrs[key]);
+        }
       }
     };
     function app(el, ...args) {
@@ -420,32 +422,39 @@ class Card {
     content_details.className = 'content-details fadeIn-bottom';
     const card_music_controls_container = _$();
     card_music_controls_container.className = 'card-music-controls-container';
-    const card_music_control_button_container = _$();
-    card_music_control_button_container.className = 'card-music-control-button-container';
+    const card_music_control_button_container1 = _$();
+    const card_music_control_button_container2 = _$();
+    const card_music_control_button_container3 = _$();
+
+    card_music_control_button_container1.className = 'card-music-control-button-container card-favorite-button-container';
+    card_music_control_button_container2.className = 'card-music-control-button-container card-play-button-container';
     const button = _$('button');
     const i = _$('i');
     i.className = 'material-icons-round svg-icon controller-icons';
-    i.innerHTML = 'favorite_border';
-    const card_music_control_button_container_menu = _$();
-    card_music_control_button_container_menu.className = 'card-music-control-button-container menu';
+    i.innerHTML = 'favorite';
+    card_music_control_button_container3.className = 'card-music-control-button-container menu        card-more-button-container';
     const button1 = _$('button');
+    button1.className = 'card-play-button';
     const button2 = _$('button');
     const i1 = _$('i');
     i1.className = 'material-icons-round svg-icon controller-icons';
-    i1.innerHTML = 'play_circle_outline';
+    i1.innerHTML = 'play_arrow';
     const i2 = _$('i');
     i2.className = 'material-icons-round svg-icon controller-icons';
-    i2.innerHTML = 'more_horiz';
+    i2.innerHTML = 'more_vert';
     const card_basic_data = _$();
     card_basic_data.className = 'card-basic-data';
     const a1 = _$('a');
-    setAttributes(a1, {'className': 'card-heading'});
+    setAttributes(a1, {'class': 'card-heading'});
     a1.innerText = this.getCardName;
-    app(card_music_control_button_container, button, button1, button2);
     button.appendChild(i);
     button1.appendChild(i1);
     button2.appendChild(i2);
-    app(content_details, card_music_control_button_container);
+    app(card_music_control_button_container1, button);
+    app(card_music_control_button_container2, button1);
+    app(card_music_control_button_container3, button2);
+    app(card_music_controls_container, card_music_control_button_container1, card_music_control_button_container2, card_music_control_button_container3);
+    app(content_details, card_music_controls_container);
     app(a, content_overlay, content_image, content_details);
     app(content, a);
     app(container, content);
@@ -462,21 +471,21 @@ class Card {
   }
 }
 class CardsList {
-  constructor(cards = [], title, description) {
+  constructor(cards, title, description) {
     this.cardList = cards;
     this.title = title;
     this.description = description;
   }
-  get list() {
-    this.cardList;
+  get getList() {
+    return this.cardList;
   }
-  get length() {
-    this.list.length;
+  get getlength() {
+    return this.list.length;
   }
-  get title() {
+  get getTitle() {
     return this.title;
   }
-  get description() {
+  get getDescription() {
     return this.description;
   }
   getCard(id = 0) {
@@ -485,14 +494,97 @@ class CardsList {
   addCard(card) {
     this.cardList.push(card);
   }
+  getCardListDOM() {
+    function setAttributes(el, attrs) {
+      if (typeof attrs !== 'undefined') {
+        for (const key in attrs) {
+          if (key === 'innertext') {
+            el.innerHTML = attrs[key];
+          } else {
+            if (Object.prototype.hasOwnProperty.call(attrs, key)) {
+              el.setAttribute(key, attrs[key]);
+            }
+          }
+        }
+      }
+      return el;
+    };
+    function app(el, ...args) {
+      for (let index = 0; index < args.length; index++) {
+        const element = args[index];
+        el.appendChild(element);
+      }
+      return el;
+    };
+    const section = setAttributes(_$('section'), {'class': 'section'});
+    const sectionTitle = setAttributes(_$(), {'class': 'section-title'});
+
+    const h2 = _$('h2');
+    h2.innerText = this.getTitle;
+    sectionTitle.appendChild(h2);
+    const sectionCardListHolder = _$();
+    sectionCardListHolder.className = 'section-card-list-holder';
+    const leftArrowButtonContainer = _$();
+    const leftArrowButton = _$('button');
+    const leftArrowButtonIcon = _$('i');
+    leftArrowButtonIcon.className = 'material-icons';
+    leftArrowButtonIcon.innerHTML = 'keyboard_arrow_left';
+    leftArrowButton.className = 'left-arrow-button';
+    const sectionStageOuter = _$();
+    const sectionStages = _$('ul');
+    const rightArrowButtonContainer = _$();
+    const rightArrowButton = _$('button');
+    const rightArrowButtonIcon = _$('i');
+    const t1 = app(setAttributes(leftArrowButtonContainer, {'class': 'left-arrow-button-container'}), app(leftArrowButton, leftArrowButtonIcon));
+    const t2 = app(setAttributes(rightArrowButtonContainer,
+        {
+          'class': 'right-arrow-button-container',
+        }),
+    app(setAttributes(rightArrowButton, {
+      'class': 'right-arrow-button',
+    }),
+    setAttributes(rightArrowButtonIcon, {'class': 'material-icons', 'innertext': 'keyboard_arrow_right'}))
+    );
+    const t3 = app(setAttributes(sectionStageOuter, {
+      'class': 'section-stage-outer',
+    }),
+    setAttributes(sectionStages, {'class': 'section-stage'}));
+    const t4 = app(sectionCardListHolder, leftArrowButtonContainer, sectionStageOuter, rightArrowButtonContainer);
+    const t5 = app(section, sectionTitle, sectionCardListHolder);
+    const cardList = this.getList.cards;
+    cardList && cardList.map((card, index) => {
+      const cardInstance = new Card(card.cardName, card.cardUrl, card.cardImage, card.cardDescription, card.cardType);
+      const cardDom = cardInstance.getCardDOM();
+      app(sectionStages, cardDom);
+    });
+    return section;
+  }
 }
-function _(id = '') {
+const cardList = {
+  'cards': [{
+    'cardName': 'Title',
+    'cardUrl': '#',
+    'cardImage': 'image/song.jpg',
+    'cardDescription': 'hello',
+    'cardType': 0,
+  },
+  {
+    'cardName': 'Title',
+    'cardUrl': '#',
+    'cardImage': 'image/song.jpg',
+    'cardDescription': 'hello',
+    'cardType': 0,
+  },
+  ],
+};
+
+function _(id = '', scope = document) {
   if (id.slice(0, 1) === '#') {
-    return document.getElementById(id.slice(1));
+    return scope.getElementById(id.slice(1));
   } else if (id.slice(0, 1) === '.') {
-    return document.getElementsByClassName(id.slice(1));
+    return scope.getElementsByClassName(id.slice(1));
   } else {
-    return document.querySelectorAll(id);
+    return scope.querySelectorAll(id);
   }
 }
 function _$(node = 'div') {
@@ -731,6 +823,12 @@ const Audiocontroller = (function() {
   };
 })();
 const uIHandler = () => {
+  const mainHome = _('.main-home')[0];
+
+  const cardsList = new CardsList(cardList, 'djdsd', 'dskdjs');
+  const cardsListDom = cardsList.getCardListDOM();
+  console.log(cardsListDom);
+  mainHome.appendChild(cardsListDom);
   const playButton = _('#play-button');
   const shuffleButton = _('#shuffleButton');
   const prevButton = _('#prev-button');
@@ -928,7 +1026,7 @@ const uIHandler = () => {
     element.addEventListener('click', (event) => menuClick(event));
   }
   //  TODO : ripple effect
-  for (let index = 0; index < cardListHolders.length; index++) {
+  for (let index = 0; index < sectionStages.length; index++) {
     const leftArrowButton = leftArrowButtons[index];
     const rightArrowButton = rightArrowButtons[index];
     const sectionStage = sectionStages[index];
@@ -937,7 +1035,7 @@ const uIHandler = () => {
     const width = cardWidth * sectionStage.childElementCount;
     const curvePoints = [0.4, 0.0, 0.2, 1];
     console.log(width);
-    slide = (event, sign = 1) => {
+    slide = (event, sign = 1, sectionStage) => {
       event.preventDefault();
       const scroll = sectionStage.scrollLeft;
       if (sign == -1) {
@@ -949,8 +1047,8 @@ const uIHandler = () => {
       }
       event.stopPropagation();
     };
-    leftArrowButton.addEventListener('click', (event) => slide(event, -1));
-    rightArrowButton.addEventListener('click', (event) => slide(event, 1));
+    leftArrowButton.addEventListener('click', (event) => slide(event, -1, sectionStage));
+    rightArrowButton.addEventListener('click', (event) => slide(event, 1, sectionStage));
   }
 
   const elementListForAnimation = [];
@@ -987,7 +1085,6 @@ const uIHandler = () => {
 
     const handler = setInterval((listArray, name) => {
       const list = listArray[0];
-      console.log(list);
       const time = list.times;
       const tempx = list.x[time] - list.x[time - 1];
       const tempy = list.y[time] - list.y[time - 1];
@@ -995,7 +1092,8 @@ const uIHandler = () => {
       const element = list.element;
       const start = list.start;
       const end = list.end;
-      element.scrollLeft = start + (slopeSign * list.y[time] * end);
+      const temp = start + (slopeSign * list.y[time] * end);
+      element.scrollLeft = temp;
       elementListForAnimation[name][0].times = time + 1;
       if (time == 100) {
         clearInterval(handler);
@@ -1005,7 +1103,7 @@ const uIHandler = () => {
     elementListForAnimation[name][0].handler = handler;
   };
   animationRemoveSetInterval = (name = '') => {
-    if (elementListForAnimation[name]&&elementListForAnimation[name][0]&&elementListForAnimation[name][0].handler) {
+    if (elementListForAnimation[name] && elementListForAnimation[name][0] && elementListForAnimation[name][0].handler) {
       clearInterval(elementListForAnimation[name][0].handler);
     }
     elementListForAnimation[name] = [];
@@ -1013,5 +1111,6 @@ const uIHandler = () => {
 };
 const c = new Card('akjs', 'adsa', 'image/song.jpg', 'sadad', 0);
 console.log(c.getCardDOM());
+
 // console.log(c.commandAudioController('play'));
 uIHandler();
