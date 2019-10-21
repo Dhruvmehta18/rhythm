@@ -842,7 +842,7 @@ const uIHandler = () => {
   const mainBackIcon = _('#main-back-icon');
   const searchBlockText = _('#search-block-text');
   const menus = _('.menu');
-  const subMenu = _('.sub-menu')[0];
+  const optionsMenu = _('#options-menu');
   const searchHintInput = _('#input-search-hint');
   const sectionStages = _('.section-stage');
   const leftArrowButtons = _('.left-arrow-button');
@@ -995,9 +995,9 @@ const uIHandler = () => {
     const heightSubMenu = 152;
     const sx = (elementXY.x + elementWH.w + widthSubMenu + pad) > windowWH.w ? (elementXY.x - widthSubMenu - pad + elementWH.w) : (elementXY.x + elementWH.w + pad);
     const sy = (elementXY.y + elementWH.h + heightSubMenu + pad) > windowWH.h ? (elementXY.y - heightSubMenu - pad) : (elementXY.y + elementWH.h + pad);
-    subMenu.style.display = 'block';
-    subMenu.style.top = `${sy}px`;
-    subMenu.style.left = `${sx}px`;
+    optionsMenu.style.display = 'block';
+    optionsMenu.style.top = `${sy}px`;
+    optionsMenu.style.left = `${sx}px`;
   };
   searchContainerClick = () => {
     searchFormContainer.classList.remove('close-search');
@@ -1021,6 +1021,11 @@ const uIHandler = () => {
   headerSearchInput.addEventListener('keyup', (event) => searchInputKeyUp(event));
   searchContainer.addEventListener('click', (event) => searchContainerClick());
   mainBackIcon.addEventListener('click', (event) => mainBackIconClick());
+  document.addEventListener('click', () => {
+    if (optionsMenu.style.display == 'block') {
+      optionsMenu.style.display = 'none';
+    }
+  });
   for (let index = 0; index < menus.length; index++) {
     const element = menus[index];
     element.addEventListener('click', (event) => menuClick(event));
