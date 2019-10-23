@@ -592,13 +592,11 @@ function _$(node = 'div') {
 }
 const Audiocontroller = (function() {
   let currentCard;
-  // if (currentCard !== card) {
-  //   currentCard = card;
-  // }
   let audioContext;
   let audioTrack;
   let audioTrackSliderHandle;
-
+  let typeEvent = 0;
+  const audioPlayForPublishers = [false, 0];
   const publisherSubscriber = {};
   // queueCommands.init();
   changeSongUrl = (url = '') => {
@@ -671,12 +669,12 @@ const Audiocontroller = (function() {
   (function() {
     audioElement.addEventListener('playing', (event) => {
       console.log('Video is no longer paused');
-      publisherSubscriber.publish('audioPlaying', true);
+      publisherSubscriber.publish('audioPlaying', audioPlayForPublishers);
       setAudioTrack(true);
     });
     audioElement.addEventListener('pause', (event) => {
       console.log('The Boolean paused property is now true. Either the ' + 'pause() method was called or the autoplay attribute was toggled.');
-      publisherSubscriber.publish('audioPlaying', false);
+      publisherSubscriber.publish('audioPlaying', audioPlayForPublishers);
       setAudioTrack(false);
     });
     audioElement.addEventListener('waiting', (event) => {
@@ -774,9 +772,11 @@ const Audiocontroller = (function() {
       }
     };
   })(publisherSubscriber);
-
+  changeIconPlay = (data) => {
+    
+  }
   const subscribionId1 = publisherSubscriber.subscribe('audioPlaying', (data) => {
-    if (data) {
+    if (data[0]) {
       playButton.dataset.playing = 'true';
       playButton.innerHTML = 'pause';
     } else {
@@ -786,11 +786,18 @@ const Audiocontroller = (function() {
   });
   const subscribionId2 = publisherSubscriber.subscribe('audioPlaying', (data) => {
     console.log('this is for card');
+    if (data[1] == 1) {
+      
+    }
   });
   const subscribionId3 = publisherSubscriber.subscribe('audioPlaying', (data) => {
     console.log('this is for queue');
   });
-  audioPlay = (id = 0) => {
+  changeCard = (element) => {
+    currentCard = element;
+  };
+  audioPlay = (id = 0, type = 0) => {
+    audioPlayForPublishers[1] = typeEvent;
     startAudio();
     switch (id) {
       case 1:
@@ -811,7 +818,11 @@ const Audiocontroller = (function() {
         currentSong = song;
         changeSongUrl(currentSong.getSongAudioUrl);
       }
-      (audioElement.paused) ? play() : pause();
+      const pauseCheck = audioElement.paused;
+      typeEvent = type;
+      audioPlayForPublishers[0] = pauseCheck;
+      audioPlayForPublishers[1] = typeEvent;
+      (pauseCheck) ? play() : pause();
       return true;
     } else {
       return false;
@@ -848,6 +859,7 @@ const uIHandler = () => {
   const leftArrowButtons = _('.left-arrow-button');
   const rightArrowButtons = _('.right-arrow-button');
   const cardListHolders = _('.section-card-list-holder');
+  const cardPlayButtons = _('.card-play-button');
   playButtonClick = () => {
     playButton.disabled = true;
     const check = Audiocontroller.execute();
@@ -898,6 +910,14 @@ const uIHandler = () => {
         break;
     }
   };
+  cardPlayButtonClick = (event) => {
+    event.preventDefault();
+    Audiocontroller.execute(0, 1);
+  };
+  for (let index = 0; index < cardPlayButtons.length; index++) {
+    const element = cardPlayButtons[index];
+    element.addEventListener('click', (event) => cardPlayButtonClick(event));
+  }
   searchInputKeyUp = (event) => {
     event.preventDefault();
     const keyDownArrow = 40;
