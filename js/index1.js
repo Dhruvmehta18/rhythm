@@ -1,3 +1,6 @@
+
+const song_folder_path='\\rhythm\\songs\\';
+const image_folder_path='\\rhythm\\images\\';
 class Song {
   constructor(songId, songName, songAudioUrl, songImageUrl, songDuration, artists, album) {
     this.songId = songId;
@@ -833,6 +836,19 @@ const Audiocontroller = (function() {
     execute: (id) => audioPlay(id),
   };
 })();
+
+const callController ={
+  callAjax: function(type ='POST', data={},url='',dataType={},callBack){
+    $.ajax({
+      type:type,
+      data:data,
+      url:url,
+      success:(output,status)=>{
+        callBack(output,status);
+      },
+    });
+  }
+}
 const uIHandler = () => {
   const mainHome = _('#main-home');
 
@@ -918,11 +934,55 @@ const uIHandler = () => {
     const element = cardPlayButtons[index];
     element.addEventListener('click', (event) => cardPlayButtonClick(event));
   }
+
+  searchAfterDataRetrieval = (data,value) => {
+    
+    let filterList = data['searchItems'];
+    const dropDown = document.getElementsByClassName('dropdown-menu')[0];
+
+    dropDown.style.display = 'block';
+    for (; dropDown.childElementCount > 0;) {
+      dropDown.removeChild(dropDown.lastElementChild);
+    }
+    const filterListCheck = filterList && filterList.length != 0;
+    if (filterListCheck) {
+      filterList.map((itemValue) => {
+        const name = itemValue.song_name;
+        const patternString = new RegExp(`${value}`, 'igm');
+        const div = document.createElement('div');
+        const a = document.createElement('a');
+        const img = document.createElement('img');
+        const span = document.createElement('span');
+        div.className = 'dataset';
+        a.className = 'dropdown-item dropdown-suggestion';
+        a.href = song_folder_path+itemValue['song_src'];
+        img.src = image_folder_path+itemValue['profile_pic'];
+        img.alt = itemValue['name'];
+        let tempStartIndex = 0;
+        while ((match = patternString.exec(name))) {
+          const startIndex = match.index;
+          const endIndex = patternString.lastIndex;
+          console.log(startIndex + ' ' + endIndex);
+          const strong = document.createElement('strong');
+          strong.innerHTML = value;
+          span.appendChild(document.createTextNode(name.substring(tempStartIndex, startIndex)));
+          span.appendChild(strong);
+          tempStartIndex = endIndex;
+        }
+        span.appendChild(document.createTextNode(name.substring(tempStartIndex, name.length)));
+        a.appendChild(img);
+        a.appendChild(span);
+        div.appendChild(a);
+        dropDown.appendChild(div);
+      });
+    }
+  };
   searchInputKeyUp = (event) => {
     event.preventDefault();
+    
+    const dropDown = document.getElementsByClassName('dropdown-menu')[0];
     const keyDownArrow = 40;
     let previousKey;
-    let filterList = [];
     const countKeyDown = 0;
     isPreviousKeyDownArrow = () => {
       return previousKey === keyDownArrow;
@@ -933,54 +993,18 @@ const uIHandler = () => {
     if (!isKeyDownArrow()) {
       const value = event.currentTarget.value.trim();
       const conditionValue = value != undefined && value != null && value != '';
-      filterList =
-        conditionValue &&
-        data.dataItems.filter((itemValue) => {
-          const name = itemValue.name;
-          const patternString = new RegExp(`${value}`, 'i');
-          return patternString.test(name);
-        });
-
-      const dropDown = document.getElementsByClassName('dropdown-menu')[0];
-
-      dropDown.style.display = 'block';
-      for (; dropDown.childElementCount > 0;) {
-        dropDown.removeChild(dropDown.lastElementChild);
-      }
-      const filterListCheck = filterList && filterList.length != 0;
-      if (filterListCheck) {
-        filterList.map((itemValue) => {
-          const name = itemValue.name;
-          const patternString = new RegExp(`${value}`, 'igm');
-          const div = document.createElement('div');
-          const a = document.createElement('a');
-          const img = document.createElement('img');
-          const span = document.createElement('span');
-          div.className = 'dataset';
-          a.className = 'dropdown-item dropdown-suggestion';
-          a.href = itemValue['url'];
-          img.src = itemValue['image-url'];
-          img.alt = itemValue['name'];
-          let tempStartIndex = 0;
-          while ((match = patternString.exec(name))) {
-            const startIndex = match.index;
-            const endIndex = patternString.lastIndex;
-            console.log(startIndex + ' ' + endIndex);
-            const strong = document.createElement('strong');
-            strong.innerHTML = value;
-            span.appendChild(document.createTextNode(name.substring(tempStartIndex, startIndex)));
-            span.appendChild(strong);
-            tempStartIndex = endIndex;
-          }
-          span.appendChild(document.createTextNode(name.substring(tempStartIndex, name.length)));
-          a.appendChild(img);
-          a.appendChild(span);
-          div.appendChild(a);
-          dropDown.appendChild(div);
-        });
-      }
-    } else {
-      // filterList
+      if(conditionValue){
+      callController.callAjax('POST',{searchInput:value},'../rhythm/databaseTasks/search.php',{},
+      (data,status)=>{
+        if(status==='success'){
+        const jsonData = JSON.parse(JSON.parse(JSON.stringify(data)));
+        console.log(jsonData);
+          searchAfterDataRetrieval(jsonData, value);
+        }
+      });
+    } else{
+      dropDown.style.display='none';
+    }
     }
   };
   menuClick = (event) => {
