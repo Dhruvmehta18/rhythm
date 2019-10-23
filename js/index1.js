@@ -823,7 +823,7 @@ const Audiocontroller = (function() {
   };
 })();
 const uIHandler = () => {
-  const mainHome = _('.main-home')[0];
+  const mainHome = _('#main-home');
 
   const cardsList = new CardsList(cardList, 'djdsd', 'dskdjs');
   const cardsListDom = cardsList.getCardListDOM();
