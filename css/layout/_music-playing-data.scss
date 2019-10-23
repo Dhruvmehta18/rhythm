@@ -1,24 +1,25 @@
-.data{
-    margin:0 16px;
-    a{
-        display: block;
-    }
-    a:hover{
-        text-decoration: underline;
-    }
-    a.card-heading{
-        padding: 2px;
-        font-size: 1rem;
-        font-weight: 500;
-    }
-    a.card-subHeading{
-        padding:0 0 2px 0;
-        font-size: 0.8rem;
-        color: rgba($color: #ffffff, $alpha: 0.7);
-    }
+.data {
+  margin: 0 16px;
+  a {
+    display: block;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  a.card-heading {
+    padding: 2px;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  a.card-subHeading {
+    padding: 0 0 2px 0;
+    font-size: 0.8rem;
+    color: rgba($color: #ffffff, $alpha: 0.7);
+  }
 }
-.card-basic-data{
-    @extend .data ;
-    margin:0;
-    text-align: center;
+.card-basic-data {
+  @extend .data;
+  display: flex;
+  flex-direction: column;
+  margin: 0 4px;
 }

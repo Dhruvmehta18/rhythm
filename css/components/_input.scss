@@ -1,12 +1,12 @@
-input{
-    width: 160px;
-    height: 2.5rem;
-    border: 0!important;
-    outline: 0!important;
-    box-shadow: none!important;
-    color: inherit;
-    opacity: 0.5;
-    font-weight: 700;
-    transition-delay: .5s;
-    transition: opacity .3s ease-in-out,width .3s;
+input {
+  width: 160px;
+  height: 2.5rem;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  color: inherit;
+  opacity: 0.5;
+  font-weight: 700;
+  transition-delay: 0.5s;
+  transition: opacity 0.3s ease-in-out, width 0.3s;
 }
