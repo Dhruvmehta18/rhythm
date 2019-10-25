@@ -1,8 +1,8 @@
 
-const song_folder_path='\\rhythm\\songs\\';
-const image_folder_path='\\rhythm\\images\\';
+const song_folder_path = '\\rhythm\\songs\\';
+const image_folder_path = '\\rhythm\\images\\';
 class Song {
-  constructor(songId, songName, songAudioUrl, songImageUrl, songDuration, artists, album) {
+  constructor(songId, songName, songAudioUrl, songImageUrl, songDuration = 0, artists = '', album = '') {
     this.songId = songId;
     this.songName = songName;
     this.songAudioUrl = songAudioUrl;
@@ -190,91 +190,88 @@ class SongsQueue {
     this.initializeQueueList(array);
   }
 }
-const song = new Song(1, '34', '3sdd', 'sfsd', 432423, 'asda', 'dasd');
-const queue = new SongsQueue([song], 'album', 'hello', 'askajs');
-queue.setQueueTitle('dsfs');
-console.log(queue);
 
 const commandMusicController = {
   queueController: function() {
     let songsQueueObject;
-    checkInstance = () => {
-      return (songsQueueObject instanceof SongsQueue);
+    checkSong = () => {
+      return typeof songsQueueObject !== 'undefined';
     };
     const commands = {
       queueInit: function(songsList, listType, queueTitle, queueImageUrl) {
         songsQueueObject = new SongsQueue(songsList, listType, queueTitle, queueImageUrl);
       },
       getAllSongs: function() {
-        const check = checkInstance();
-        return check ? songsQueueObject.getAllSongsData : [];
+        const check = checkSong();
+        return check && songsQueueObject.getAllSongsData;
       },
       getQueueLength: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.length;
       },
       getTitle: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.getQueueTitle;
       },
       getImageUrl: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.getQueueImageUrl;
       },
       getQueue: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.getQueueList;
       },
       getSong: function(id) {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.getQueueSong(id);
       },
       nextSong: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.nextSong;
       },
       next: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.next();
       },
       play: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.play;
       },
       setSongData: function(array) {
-        const check = checkInstance();
-        check && songsQueueObject.setSongData(array);
+        const check = checkSong();
+        return check && songsQueueObject.setSongData(array);
       },
       setTitle: function(title) {
-        const check = checkInstance();
-        check && songsQueueObject.setQueueTitle(title);
+        const check = checkSong();
+        return check && songsQueueObject.setQueueTitle(title);
       },
       setImageUrl: function(url) {
-        const check = checkInstance();
-        check && songsQueueObject.setSongImageUrl(url);
+        const check = checkSong();
+        return check && songsQueueObject.setSongImageUrl(url);
       },
       setQueue: function(array) {
-        const check = checkInstance();
-        check && songsQueueObject.setQueueList(array);
+        const check = checkSong();
+        return check && songsQueueObject.setQueueList(array);
       },
       addSong: function(song) {
-        const check = checkInstance();
-        check && songsQueueObject.addSong(song);
+        const check = checkSong();
+        return check && songsQueueObject.addSong(song);
       },
       repeatSong: function() {
-        const check = checkInstance();
+        const check = checkSong();
         return check && songsQueueObject.repeatSong();
       },
       addNextSong: function(id) {
-        const check = checkInstance();
-        check && songsQueueObject.addNextToList(id);
+        const check = checkSong();
+        return check && songsQueueObject.addNextToList(id);
       },
       checkNext: function() {
-        return songsQueueObject.checkNext;
+        const check = checkSong();
+        return check && songsQueueObject.checkNext;
       },
       shuffle: function() {
-        const check = checkInstance();
-        check && songsQueueObject.shuffle();
+        const check = checkSong();
+        return check && songsQueueObject.shuffle();
       },
     };
     return {
@@ -323,16 +320,17 @@ const commandMusicController = {
 };
 
 const queueCommands = commandMusicController.queueController().commands;
-const songsCommands = commandMusicController.songs().commands;
-const songsl = songsCommands.init(2, '34', 'song1.mp3', 'sfsd', 432423, 'asda', 'dasd');
+// const songsCommands = commandMusicController.songs().commands;
+// const songsl = songsCommands.init(2, '34', 'song1.mp3', 'sfsd', 432423, 'asda', 'dasd');
 
-const song2 = songsCommands.init(2, '34', 'song.mp3', 'sfsd', 432423, 'asda', 'dasd');
-console.log(songsl);
-queueCommands.queueInit([songsl, song2], 'album', 'hello', 'askajs');
-console.log(queueCommands.getAllSongs());
+// const song2 = songsCommands.init(2, '34', 'song.mp3', 'sfsd', 432423, 'asda', 'dasd');
+// console.log(songsl);
+// queueCommands.queueInit([songsl, song2], 'album', 'hello', 'askajs');
+// console.log(queueCommands.getAllSongs());
 
 class Card {
-  constructor(cardName = '', cardUrl = '', cardImage = '', description = '', cardType = 0) {
+  constructor(cardId, cardName = '', cardUrl = '', cardImage = '', description = '', cardType = 0) {
+    this.card_id = cardId;
     this.cardName = cardName;
     this.cardUrl = cardUrl;
     this.cardImage = cardImage;
@@ -358,6 +356,9 @@ class Card {
     ];
     const optionList = optionsList[cardType];
     this.options = optionList;
+  }
+  get getCardId() {
+    return this.card_id;
   }
   get getCardName() {
     return this.cardName;
@@ -390,7 +391,7 @@ class Card {
     };
     commands[command]();
   }
-  commandQueue(song) {
+  commandQueue() {
     const queueCommands = commandMusicController.queueController().commands;
     queueCommands.queueInit([], this.getCardType, this.cardName, this.getCardImage);
   }
@@ -408,6 +409,26 @@ class Card {
         el.appendChild(element);
       }
     };
+    function cardPlayButtonClick(event, id) {
+      event.preventDefault();
+      function cardPlay(data, status) {
+        if (status === 'success') {
+          const result = JSON.parse(JSON.parse(JSON.stringify(data)));
+          console.log(result);
+          const playlistInfo = result['playlist_info'][0];
+          const queue = result['queue'];
+          queueCommands.queueInit([], playlistInfo.playlist_type, playlistInfo.playlist_name, c.playlist_photo_url);
+          for (let index = 0; index < queue.length; index++) {
+            const element = queue[index];
+            const songsCommands = commandMusicController.songs().commands;
+            const song = songsCommands.init(element.song_id, element.song_name, element.song_audio_url, element.song_image_url, 0, 'as', 'as');
+            queueCommands.addSong(song);
+          }
+          Audiocontroller.execute(0, 1);
+        }
+      };
+      callController.callAjax('POST', {playlist_id: id}, './getQueue.php', {}, (data, status) => cardPlay(data, status));
+    };
     const card = _$();
     card.className = 'card';
     const container = _$();
@@ -423,6 +444,7 @@ class Card {
     setAttributes(content_image, {'src': 'image/song.jpg', 'alt': this.cardName});
     const content_details = _$();
     content_details.className = 'content-details fadeIn-bottom';
+    content_details.setAttribute('data-playlist-id', this.cardUrl);
     const card_music_controls_container = _$();
     card_music_controls_container.className = 'card-music-controls-container';
     const card_music_control_button_container1 = _$();
@@ -453,6 +475,7 @@ class Card {
     button.appendChild(i);
     button1.appendChild(i1);
     button2.appendChild(i2);
+    button1.addEventListener('click', (event) => cardPlayButtonClick(event, this.getCardId));
     app(card_music_control_button_container1, button);
     app(card_music_control_button_container2, button1);
     app(card_music_control_button_container3, button2);
@@ -554,9 +577,14 @@ class CardsList {
     setAttributes(sectionStages, {'class': 'section-stage'}));
     const t4 = app(sectionCardListHolder, leftArrowButtonContainer, sectionStageOuter, rightArrowButtonContainer);
     const t5 = app(section, sectionTitle, sectionCardListHolder);
-    const cardList = this.getList.cards;
+    const cardList = this.getList;
     cardList && cardList.map((card, index) => {
-      const cardInstance = new Card(card.cardName, card.cardUrl, card.cardImage, card.cardDescription, card.cardType);
+      // playlist_description: "BlurryFace"
+      // playlist_id: "1"
+      // playlist_name: "BlurryFace"
+      // playlist_photo_url: "image/song.jpg"
+      // playlist_type: "1"
+      const cardInstance = new Card(card.playlist_id, card.playlist_name, card.playlist_url, card.playlist_photo_url, card.playlist_description, card.playlist_type);
       const cardDom = cardInstance.getCardDOM();
       app(sectionStages, cardDom);
     });
@@ -624,11 +652,32 @@ const Audiocontroller = (function() {
   playNext = () => {
     queueCommands.next();
   };
+  showController1 = () => {
+    if (currentSong) {
+      const controller1 = _('.controller-1')[0];
+      const img = _(' .song-image img', controller1)[0];
+      img.src = currentSong.song_image_url;
+      const cardHeading = _(' .data .card-heading')[0];
+      cardHeading.innerText = currentSong.song_name;
+      const cardSubHeading = _(' .data .card-subHeading')[0];
+      cardSubHeading.innerText = '';
+    }
+    else {
+      const controller1 = _('.controller-1')[0];
+      const img = _(' .song-image img', controller1)[0];
+      img.src = currentSong.song_image_url;
+      const cardHeading = _(' .data .card-heading')[0];
+      cardHeading.innerText = currentSong.song_name;
+      const cardSubHeading = _(' .data .card-subHeading')[0];
+      cardSubHeading.innerText = '';
+    }
+  };
   let currentSong = queueCommands.play();
   const playButton = _('#play-button');
 
   const audioElement = document.querySelector('audio');
   changeSongUrl(currentSong.getSongAudioUrl);
+  showController1();
   const audioTrackStartTime = document.getElementById('start-time');
   const audioTrackEndTime = document.getElementById('end-time');
   timeConversion = (sec) => {
@@ -776,8 +825,8 @@ const Audiocontroller = (function() {
     };
   })(publisherSubscriber);
   changeIconPlay = (data) => {
-    
-  }
+
+  };
   const subscribionId1 = publisherSubscriber.subscribe('audioPlaying', (data) => {
     if (data[0]) {
       playButton.dataset.playing = 'true';
@@ -790,7 +839,7 @@ const Audiocontroller = (function() {
   const subscribionId2 = publisherSubscriber.subscribe('audioPlaying', (data) => {
     console.log('this is for card');
     if (data[1] == 1) {
-      
+
     }
   });
   const subscribionId3 = publisherSubscriber.subscribe('audioPlaying', (data) => {
@@ -837,25 +886,31 @@ const Audiocontroller = (function() {
   };
 })();
 
-const callController ={
-  callAjax: function(type ='POST', data={},url='',dataType={},callBack){
+const callController = {
+  callAjax: function(type = 'POST', data = {}, url = '', dataType = {}, callBack) {
     $.ajax({
-      type:type,
-      data:data,
-      url:url,
-      success:(output,status)=>{
-        callBack(output,status);
+      type: type,
+      data: data,
+      url: url,
+      success: (output, status) => {
+        callBack(output, status);
       },
     });
-  }
-}
-const uIHandler = () => {
-  const mainHome = _('#main-home');
+  },
+};
 
-  const cardsList = new CardsList(cardList, 'djdsd', 'dskdjs');
+const mainHome = _('#main-home');
+changeHome = (data, status) => {
+  const result = JSON.parse(JSON.parse(JSON.stringify(data)))[0];
+  console.log(result);
+  const cardsList = new CardsList(result, 'djdsd', 'dskdjs');
   const cardsListDom = cardsList.getCardListDOM();
   console.log(cardsListDom);
   mainHome.appendChild(cardsListDom);
+  uIHandler();
+};
+callController.callAjax('GET', {}, './getHomeData.php', {}, (data, status) => changeHome(data, status));
+const uIHandler = () => {
   const playButton = _('#play-button');
   const shuffleButton = _('#shuffleButton');
   const prevButton = _('#prev-button');
@@ -926,18 +981,14 @@ const uIHandler = () => {
         break;
     }
   };
-  cardPlayButtonClick = (event) => {
-    event.preventDefault();
-    Audiocontroller.execute(0, 1);
-  };
-  for (let index = 0; index < cardPlayButtons.length; index++) {
-    const element = cardPlayButtons[index];
-    element.addEventListener('click', (event) => cardPlayButtonClick(event));
-  }
 
-  searchAfterDataRetrieval = (data,value) => {
-    
-    let filterList = data['searchItems'];
+  // for (let index = 0; index < cardPlayButtons.length; index++) {
+  //   const element = cardPlayButtons[index];
+  //   element.addEventListener('click', (event) => cardPlayButtonClick(event));
+  // }
+
+  searchAfterDataRetrieval = (data, value) => {
+    const filterList = data['searchItems'];
     const dropDown = document.getElementsByClassName('dropdown-menu')[0];
 
     dropDown.style.display = 'block';
@@ -955,8 +1006,8 @@ const uIHandler = () => {
         const span = document.createElement('span');
         div.className = 'dataset';
         a.className = 'dropdown-item dropdown-suggestion';
-        a.href = song_folder_path+itemValue['song_src'];
-        img.src = image_folder_path+itemValue['profile_pic'];
+        a.href = song_folder_path + itemValue['song_src'];
+        img.src = image_folder_path + itemValue['profile_pic'];
         img.alt = itemValue['name'];
         let tempStartIndex = 0;
         while ((match = patternString.exec(name))) {
@@ -979,7 +1030,7 @@ const uIHandler = () => {
   };
   searchInputKeyUp = (event) => {
     event.preventDefault();
-    
+
     const dropDown = document.getElementsByClassName('dropdown-menu')[0];
     const keyDownArrow = 40;
     let previousKey;
@@ -993,18 +1044,18 @@ const uIHandler = () => {
     if (!isKeyDownArrow()) {
       const value = event.currentTarget.value.trim();
       const conditionValue = value != undefined && value != null && value != '';
-      if(conditionValue){
-      callController.callAjax('POST',{searchInput:value},'../rhythm/databaseTasks/search.php',{},
-      (data,status)=>{
-        if(status==='success'){
-        const jsonData = JSON.parse(JSON.parse(JSON.stringify(data)));
-        console.log(jsonData);
-          searchAfterDataRetrieval(jsonData, value);
-        }
-      });
-    } else{
-      dropDown.style.display='none';
-    }
+      if (conditionValue) {
+        callController.callAjax('POST', {searchInput: value}, '../rhythm/databaseTasks/search.php', {},
+            (data, status) => {
+              if (status === 'success') {
+                const jsonData = JSON.parse(JSON.parse(JSON.stringify(data)));
+                console.log(jsonData);
+                searchAfterDataRetrieval(jsonData, value);
+              }
+            });
+      } else {
+        dropDown.style.display = 'none';
+      }
     }
   };
   menuClick = (event) => {
@@ -1162,4 +1213,3 @@ const c = new Card('akjs', 'adsa', 'image/song.jpg', 'sadad', 0);
 console.log(c.getCardDOM());
 
 // console.log(c.commandAudioController('play'));
-uIHandler();
