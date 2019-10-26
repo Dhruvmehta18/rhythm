@@ -79,7 +79,7 @@ class SongsQueue {
     return this.queueList;
   }
   get nextSong() {
-    return this.queueList[(++this.queueCurrent) % this.length];
+    return this.queueList[(this.queueCurrent+1) % this.length];
   }
   get getRepeat() {
     return this.repeat;
@@ -651,23 +651,23 @@ const Audiocontroller = (function() {
   };
   playNext = () => {
     queueCommands.next();
+    showController1();
   };
   showController1 = () => {
     if (currentSong) {
       const controller1 = _('.controller-1')[0];
       const img = _(' .song-image img', controller1)[0];
-      img.src = currentSong.song_image_url;
+      img.src = currentSong.songImageUrl;
       const cardHeading = _(' .data .card-heading')[0];
-      cardHeading.innerText = currentSong.song_name;
+      cardHeading.innerText = currentSong.songName;
       const cardSubHeading = _(' .data .card-subHeading')[0];
       cardSubHeading.innerText = '';
-    }
-    else {
+    } else {
       const controller1 = _('.controller-1')[0];
       const img = _(' .song-image img', controller1)[0];
-      img.src = currentSong.song_image_url;
+      img.src = './image/song.jpg';
       const cardHeading = _(' .data .card-heading')[0];
-      cardHeading.innerText = currentSong.song_name;
+      cardHeading.innerText = '';
       const cardSubHeading = _(' .data .card-subHeading')[0];
       cardSubHeading.innerText = '';
     }
@@ -869,6 +869,7 @@ const Audiocontroller = (function() {
       if (currentSong !== song) {
         currentSong = song;
         changeSongUrl(currentSong.getSongAudioUrl);
+        showController1();
       }
       const pauseCheck = audioElement.paused;
       typeEvent = type;
