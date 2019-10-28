@@ -8,8 +8,9 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link rel="stylesheet" href="login.css">
-    <script src="checker.js"></script>
+    <link rel="stylesheet" href="login.css"/>
+    <script src="js/checker.js"></script>
+    
 </head>
 <?php
 if($_SERVER['REQUEST_METHOD']=='POST')

@@ -19,7 +19,7 @@ else{
         $_SESSION['pwd']=$_POST['pwd'];
 
         $_SESSION['logged_in']=true;
-        header("location: insert.php");
+        header("location: setting.php");
     }
     else{
         echo "You have entered wrong password, try again!";

@@ -25,6 +25,6 @@ else{
      $_SESSION['logged_in']=true;
     
     console.log("You've successfully registered now");
-    header("location: insert.php");
+    header("location: setting.php");
 }
 ?>

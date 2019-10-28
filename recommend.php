@@ -50,7 +50,6 @@ function similarity_distance($matrix,$person1,$person2)
         }
         foreach($total as $key=>$value){
             $ranks[$key]=$value/$simsums[$key];
-            
         }
         array_multisort($ranks,SORT_DESC);
             return $ranks;

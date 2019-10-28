@@ -1,8 +1,9 @@
+const playlist_image_folder_path='\\rhythm\\playlist\\';
+const song_folder_path = '\\rhythm\\songs\\';
+const image_folder_path = '\\rhythm\\images\\';
 
-const song_folder_path='\\rhythm\\songs\\';
-const image_folder_path='\\rhythm\\images\\';
 class Song {
-  constructor(songId, songName, songAudioUrl, songImageUrl, songDuration, artists, album) {
+  constructor(songId, songName, songAudioUrl, songImageUrl, songDuration = 0, artists = '', album = '', rating=0) {
     this.songId = songId;
     this.songName = songName;
     this.songAudioUrl = songAudioUrl;
@@ -10,6 +11,7 @@ class Song {
     this.songImageUrl = songImageUrl;
     this.songDuration = songDuration;
     this.album = album;
+    this.rating = rating;
   }
   // Getter Methods
   get getSongName() {
@@ -30,10 +32,16 @@ class Song {
   get getAlbum() {
     return this.album;
   }
+  get getRating(){
+    return this.rating;
+  }
 }
 
 class SongsQueue {
   constructor(songsList, listType, queueTitle, queueImageUrl) {
+    if (!sessionStorage.queue) {
+      sessionStorage.setItem("queue",JSON.stringify([]));
+    }
     SongsQueue.type = ['playlist', 'album', 'genre'];
     this.songsList = Array.isArray(songsList) ? songsList : [];
     this.listType = (typeof listType !== 'undefined' &&
@@ -79,7 +87,8 @@ class SongsQueue {
     return this.queueList;
   }
   get nextSong() {
-    return this.queueList[(++this.queueCurrent) % this.length];
+    this.queueCurrent+=1;
+    return this.queueList[(this.queueCurrent) % this.length];
   }
   get getRepeat() {
     return this.repeat;
@@ -96,7 +105,17 @@ class SongsQueue {
         this.queueCurrent = this.queueCurrent - 1;
       }
     }
-    return this.queueList[this.queueCurrent];
+    const song = this.queueList[this.queueCurrent];
+    let prevQueue = JSON.parse(sessionStorage.queue);
+    let prevSong = prevQueue[prevQueue.length-1];
+    if (typeof prevSong ==='undefined' ||prevSong.songAudioUrl !== song.songAudioUrl) {
+      prevSong = song;
+      const q = prevQueue;
+      q.push(song);
+      sessionStorage.queue=JSON.stringify(q);
+    }
+    const queue = JSON.parse(sessionStorage.queue);
+    return queue[queue.length-1];
   }
   get checkNext() {
     if (this.getRepeat == 0) {
@@ -104,6 +123,15 @@ class SongsQueue {
     } else {
       return true;
     }
+  }
+  prevSong(){
+    const song = this.queueList[this.queueCurrent]
+    const prevQueue = JSON.parse(sessionStorage.queue);
+    let prevSong = prevQueue[prevQueue.length-1];
+    if(prevSong.songAudioUrl === song.songAudioUrl){
+      prevSong=prevQueue[prevQueue.length-2];
+    }
+    return prevSong;
   }
   // Setter Methods
   /**
@@ -159,9 +187,28 @@ class SongsQueue {
   addSong(song) {
     this.queueList.push(song);
   }
+  setSong(id) {
+    let temp = 0;
+    for (let i = 0; i < this.length; i++){
+      const song = this.queueList[i];
+      if(song.songId==id){
+        temp=i;
+        break;
+      }
+    }
+    this.setQueueCurrent(temp);
+  }
   // get songs from queue by id
   getQueueSong(id = 0) {
-    return this.queueList[id];
+    let temp = 0;
+    for (let i = 0; i < this.length; i++){
+      const song = this.queueList[0];
+      if(song.songId==id){
+        temp=i;
+        br
+      }
+    }
+    return this.queueList[temp];
   }
   repeatSong() {
     this.setRepeat((this.repeat + 1) % 3);
@@ -190,128 +237,133 @@ class SongsQueue {
     this.initializeQueueList(array);
   }
 }
-const song = new Song(1, '34', '3sdd', 'sfsd', 432423, 'asda', 'dasd');
-const queue = new SongsQueue([song], 'album', 'hello', 'askajs');
-queue.setQueueTitle('dsfs');
-console.log(queue);
 
 const commandMusicController = {
-  queueController: function() {
+  queueController: function () {
     let songsQueueObject;
-    checkInstance = () => {
-      return (songsQueueObject instanceof SongsQueue);
+    checkSong = () => {
+      return typeof songsQueueObject !== 'undefined';
     };
     const commands = {
-      queueInit: function(songsList, listType, queueTitle, queueImageUrl) {
+      queueInit: function (songsList, listType, queueTitle, queueImageUrl) {
         songsQueueObject = new SongsQueue(songsList, listType, queueTitle, queueImageUrl);
       },
-      getAllSongs: function() {
-        const check = checkInstance();
-        return check ? songsQueueObject.getAllSongsData : [];
+      getAllSongs: function () {
+        const check = checkSong();
+        return check && songsQueueObject.getAllSongsData;
       },
-      getQueueLength: function() {
-        const check = checkInstance();
+      getQueueLength: function () {
+        const check = checkSong();
         return check && songsQueueObject.length;
       },
-      getTitle: function() {
-        const check = checkInstance();
+      getTitle: function () {
+        const check = checkSong();
         return check && songsQueueObject.getQueueTitle;
       },
-      getImageUrl: function() {
-        const check = checkInstance();
+      getImageUrl: function () {
+        const check = checkSong();
         return check && songsQueueObject.getQueueImageUrl;
       },
-      getQueue: function() {
-        const check = checkInstance();
+      getQueue: function () {
+        const check = checkSong();
         return check && songsQueueObject.getQueueList;
       },
-      getSong: function(id) {
-        const check = checkInstance();
+      getSong: function (id) {
+        const check = checkSong();
         return check && songsQueueObject.getQueueSong(id);
       },
-      nextSong: function() {
-        const check = checkInstance();
+      nextSong: function () {
+        const check = checkSong();
         return check && songsQueueObject.nextSong;
       },
-      next: function() {
-        const check = checkInstance();
+      prev:function(){
+        const check = checkSong();
+        return check && songsQueueObject.prevSong();
+      },
+      next: function () {
+        const check = checkSong();
         return check && songsQueueObject.next();
       },
-      play: function() {
-        const check = checkInstance();
+      play: function () {
+        const check = checkSong();
         return check && songsQueueObject.play;
       },
-      setSongData: function(array) {
-        const check = checkInstance();
-        check && songsQueueObject.setSongData(array);
+      setSongData: function (array) {
+        const check = checkSong();
+        return check && songsQueueObject.setSongData(array);
       },
-      setTitle: function(title) {
-        const check = checkInstance();
-        check && songsQueueObject.setQueueTitle(title);
+      setTitle: function (title) {
+        const check = checkSong();
+        return check && songsQueueObject.setQueueTitle(title);
       },
-      setImageUrl: function(url) {
-        const check = checkInstance();
-        check && songsQueueObject.setSongImageUrl(url);
+      setImageUrl: function (url) {
+        const check = checkSong();
+        return check && songsQueueObject.setSongImageUrl(url);
       },
-      setQueue: function(array) {
-        const check = checkInstance();
-        check && songsQueueObject.setQueueList(array);
+      setQueue: function (array) {
+        const check = checkSong();
+        return check && songsQueueObject.setQueueList(array);
       },
-      addSong: function(song) {
-        const check = checkInstance();
-        check && songsQueueObject.addSong(song);
+      addSong: function (song) {
+        const check = checkSong();
+        return check && songsQueueObject.addSong(song);
       },
-      repeatSong: function() {
-        const check = checkInstance();
+      repeatSong: function () {
+        const check = checkSong();
         return check && songsQueueObject.repeatSong();
       },
-      addNextSong: function(id) {
-        const check = checkInstance();
-        check && songsQueueObject.addNextToList(id);
+      addNextSong: function (id) {
+        const check = checkSong();
+        return check && songsQueueObject.addNextToList(id);
       },
-      checkNext: function() {
-        return songsQueueObject.checkNext;
+      checkNext: function () {
+        const check = checkSong();
+        return check && songsQueueObject.checkNext;
       },
-      shuffle: function() {
-        const check = checkInstance();
-        check && songsQueueObject.shuffle();
+      shuffle: function () {
+        const check = checkSong();
+        return check && songsQueueObject.shuffle();
       },
+      setSong: function (id) {
+        const check = checkSong();
+        return check && songsQueueObject.setSong(id);
+      }
     };
     return {
       commands,
     };
   },
-  songs: function(song) {
+  songs: function (song) {
     let songs = (typeof song !== 'undefined' && song instanceof Song) && song;
     checkInstanceSong = () => {
       return (songs instanceof Song);
     };
     const commands = {
-      init: function(...args) {
+      init: function (...args) {
         songs = new Song(...args);
         return songs;
       },
-      getName: function() {
+      getName: function () {
         const check = checkInstanceSong();
         return check && songs.getSongName;
       },
-      getAudioUrl: function() {
+      getAudioUrl: function () {
         const check = checkInstanceSong();
         return check && songs.getSongAudioUrl;
       },
-      getArtists: function() {
+      getArtists: function () {
         const check = checkInstanceSong();
         return check && songs.getArtists;
       },
-      getImageUrl: function() {
+      getImageUrl: function () {
         const check = checkInstanceSong();
         return check && songs.getSongImageUrl;
       },
-      getDuration: function() {
+      getDuration: function () {
         const check = checkInstanceSong();
         return check && songs.getSongDuration;
       },
-      getAlbum: function() {
+      getAlbum: function () {
         const check = checkInstanceSong();
         return check && songs.getAlbum;
       },
@@ -323,16 +375,17 @@ const commandMusicController = {
 };
 
 const queueCommands = commandMusicController.queueController().commands;
-const songsCommands = commandMusicController.songs().commands;
-const songsl = songsCommands.init(2, '34', 'song1.mp3', 'sfsd', 432423, 'asda', 'dasd');
+// const songsCommands = commandMusicController.songs().commands;
+// const songsl = songsCommands.init(2, '34', 'song1.mp3', 'sfsd', 432423, 'asda', 'dasd');
 
-const song2 = songsCommands.init(2, '34', 'song.mp3', 'sfsd', 432423, 'asda', 'dasd');
-console.log(songsl);
-queueCommands.queueInit([songsl, song2], 'album', 'hello', 'askajs');
-console.log(queueCommands.getAllSongs());
+// const song2 = songsCommands.init(2, '34', 'song.mp3', 'sfsd', 432423, 'asda', 'dasd');
+// console.log(songsl);
+// queueCommands.queueInit([songsl, song2], 'album', 'hello', 'askajs');
+// console.log(queueCommands.getAllSongs());
 
 class Card {
-  constructor(cardName = '', cardUrl = '', cardImage = '', description = '', cardType = 0) {
+  constructor(cardId, cardName = '', cardUrl = '', cardImage = '', description = '', cardType = 0) {
+    this.card_id = cardId;
     this.cardName = cardName;
     this.cardUrl = cardUrl;
     this.cardImage = cardImage;
@@ -358,6 +411,9 @@ class Card {
     ];
     const optionList = optionsList[cardType];
     this.options = optionList;
+  }
+  get getCardId() {
+    return this.card_id;
   }
   get getCardName() {
     return this.cardName;
@@ -390,7 +446,7 @@ class Card {
     };
     commands[command]();
   }
-  commandQueue(song) {
+  commandQueue() {
     const queueCommands = commandMusicController.queueController().commands;
     queueCommands.queueInit([], this.getCardType, this.cardName, this.getCardImage);
   }
@@ -408,21 +464,43 @@ class Card {
         el.appendChild(element);
       }
     };
+    function cardPlayButtonClick(event, id) {
+      event.preventDefault();
+      event.stopPropagation();
+      function cardPlay(data, status) {
+        if (status === 'success') {
+          const result = JSON.parse(JSON.parse(JSON.stringify(data)));
+          console.log(result);
+          const playlistInfo = result['playlist_info'][0];
+          const queue = result['queue'];
+          queueCommands.queueInit([], playlistInfo.playlist_type, playlistInfo.playlist_name, playlistInfo.playlist_photo_url);
+          for (let index = 0; index < queue.length; index++) {
+            const element = queue[index];
+            const songsCommands = commandMusicController.songs().commands;
+            const song = songsCommands.init(element.song_id, element.song_name, song_folder_path + element.song_src, image_folder_path + element.profile_pic, 0, element.artist, element.album_id, element.rating);
+            queueCommands.addSong(song);
+          }
+          Audiocontroller.execute(0, 1);
+        }
+      };
+      callController.callAjax('POST', { playlist_id: id }, './getQueue.php', {}, (data, status) => cardPlay(data, status));
+    };
     const card = _$();
     card.className = 'card';
     const container = _$();
     container.className = 'container';
     const content = _$();
     content.className = 'content';
-    const a = _$('a');
-    setAttributes(a, {'href': this.getCardUrl});
+    // const a = _$('a');
+    // setAttributes(a, { 'href': this.getCardUrl });
     const content_overlay = _$();
     content_overlay.className = 'content-overlay';
     const content_image = _$('img');
     content_image.className = 'content-image';
-    setAttributes(content_image, {'src': 'image/song.jpg', 'alt': this.cardName});
+    setAttributes(content_image, { 'src': playlist_image_folder_path+this.cardImage, 'alt': this.cardName });
     const content_details = _$();
     content_details.className = 'content-details fadeIn-bottom';
+    content_details.setAttribute('data-playlist-id', this.card_id);
     const card_music_controls_container = _$();
     card_music_controls_container.className = 'card-music-controls-container';
     const card_music_control_button_container1 = _$();
@@ -448,18 +526,18 @@ class Card {
     const card_basic_data = _$();
     card_basic_data.className = 'card-basic-data';
     const a1 = _$('a');
-    setAttributes(a1, {'class': 'card-heading'});
+    setAttributes(a1, { 'class': 'card-heading' });
     a1.innerText = this.getCardName;
     button.appendChild(i);
     button1.appendChild(i1);
     button2.appendChild(i2);
+    button1.addEventListener('click', (event) => cardPlayButtonClick(event, this.getCardId));
     app(card_music_control_button_container1, button);
     app(card_music_control_button_container2, button1);
     app(card_music_control_button_container3, button2);
     app(card_music_controls_container, card_music_control_button_container1, card_music_control_button_container2, card_music_control_button_container3);
     app(content_details, card_music_controls_container);
-    app(a, content_overlay, content_image, content_details);
-    app(content, a);
+    app(content, content_overlay, content_image, content_details);
     app(container, content);
     app(card_basic_data, a1);
     if (this.getCardType === 0) {
@@ -519,8 +597,8 @@ class CardsList {
       }
       return el;
     };
-    const section = setAttributes(_$('section'), {'class': 'section'});
-    const sectionTitle = setAttributes(_$(), {'class': 'section-title'});
+    const section = setAttributes(_$('section'), { 'class': 'section' });
+    const sectionTitle = setAttributes(_$(), { 'class': 'section-title' });
 
     const h2 = _$('h2');
     h2.innerText = this.getTitle;
@@ -538,25 +616,30 @@ class CardsList {
     const rightArrowButtonContainer = _$();
     const rightArrowButton = _$('button');
     const rightArrowButtonIcon = _$('i');
-    const t1 = app(setAttributes(leftArrowButtonContainer, {'class': 'left-arrow-button-container'}), app(leftArrowButton, leftArrowButtonIcon));
+    const t1 = app(setAttributes(leftArrowButtonContainer, { 'class': 'left-arrow-button-container' }), app(leftArrowButton, leftArrowButtonIcon));
     const t2 = app(setAttributes(rightArrowButtonContainer,
-        {
-          'class': 'right-arrow-button-container',
-        }),
-    app(setAttributes(rightArrowButton, {
-      'class': 'right-arrow-button',
-    }),
-    setAttributes(rightArrowButtonIcon, {'class': 'material-icons', 'innertext': 'keyboard_arrow_right'}))
+      {
+        'class': 'right-arrow-button-container',
+      }),
+      app(setAttributes(rightArrowButton, {
+        'class': 'right-arrow-button',
+      }),
+        setAttributes(rightArrowButtonIcon, { 'class': 'material-icons', 'innertext': 'keyboard_arrow_right' }))
     );
     const t3 = app(setAttributes(sectionStageOuter, {
       'class': 'section-stage-outer',
     }),
-    setAttributes(sectionStages, {'class': 'section-stage'}));
+      setAttributes(sectionStages, { 'class': 'section-stage' }));
     const t4 = app(sectionCardListHolder, leftArrowButtonContainer, sectionStageOuter, rightArrowButtonContainer);
     const t5 = app(section, sectionTitle, sectionCardListHolder);
     const cardList = this.getList.cards;
     cardList && cardList.map((card, index) => {
-      const cardInstance = new Card(card.cardName, card.cardUrl, card.cardImage, card.cardDescription, card.cardType);
+      // playlist_description: "BlurryFace"
+      // playlist_id: "1"
+      // playlist_name: "BlurryFace"
+      // playlist_photo_url: "image/song.jpg"
+      // playlist_type: "1"
+      const cardInstance = new Card(card.playlist_id, card.playlist_name, card.playlist_url, card.playlist_photo_url, card.playlist_description, card.playlist_type);
       const cardDom = cardInstance.getCardDOM();
       app(sectionStages, cardDom);
     });
@@ -593,15 +676,13 @@ function _(id = '', scope = document) {
 function _$(node = 'div') {
   return document.createElement(node);
 }
-const Audiocontroller = (function() {
+const Audiocontroller = (function () {
   let currentCard;
-  // if (currentCard !== card) {
-  //   currentCard = card;
-  // }
   let audioContext;
   let audioTrack;
   let audioTrackSliderHandle;
-
+  let typeEvent = 0;
+  const audioPlayForPublishers = [false, 0];
   const publisherSubscriber = {};
   // queueCommands.init();
   changeSongUrl = (url = '') => {
@@ -624,13 +705,42 @@ const Audiocontroller = (function() {
     check && audioElement.pause();
   };
   playNext = () => {
-    queueCommands.next();
+    const song = queueCommands.nextSong();
+    showController1();
+    return song;
+  };
+  playPrev = () => {
+    return queueCommands.prev();
+  };
+  showController1 = () => {
+      const controller1 = _('.controller-1')[0];
+      const img = _(' .song-image img', controller1)[0];
+      const cardHeading = _(' .data .card-heading')[0];
+      const cardSubHeading = _(' .data .card-subHeading')[0];
+      const likeElement = _('#like');
+    if (currentSong) {
+      img.src = currentSong.songImageUrl;
+      cardHeading.innerText = currentSong.songName;
+      cardSubHeading.innerText = currentSong.artists;
+      likeElement.setAttribute('data-songid',currentSong.songId);
+      if(currentSong.rating==1){
+        likeElement.style.color='#ff1744';
+      }
+      else{
+        likeElement.style.color='white';
+      }
+    } else {
+      img.src = './image/song.jpg';
+      cardHeading.innerText = '';
+      cardSubHeading.innerText = '';
+    }
   };
   let currentSong = queueCommands.play();
   const playButton = _('#play-button');
 
   const audioElement = document.querySelector('audio');
   changeSongUrl(currentSong.getSongAudioUrl);
+  showController1();
   const audioTrackStartTime = document.getElementById('start-time');
   const audioTrackEndTime = document.getElementById('end-time');
   timeConversion = (sec) => {
@@ -671,15 +781,15 @@ const Audiocontroller = (function() {
     audioTrack = document.querySelector('#time-progress-bar .ui-slider-range-min');
     audioTrackSliderHandle = document.querySelector('#time-progress-bar .ui-slider-handle');
   };
-  (function() {
+  (function () {
     audioElement.addEventListener('playing', (event) => {
       console.log('Video is no longer paused');
-      publisherSubscriber.publish('audioPlaying', true);
+      publisherSubscriber.publish('audioPlaying', audioPlayForPublishers);
       setAudioTrack(true);
     });
     audioElement.addEventListener('pause', (event) => {
       console.log('The Boolean paused property is now true. Either the ' + 'pause() method was called or the autoplay attribute was toggled.');
-      publisherSubscriber.publish('audioPlaying', false);
+      publisherSubscriber.publish('audioPlaying', audioPlayForPublishers);
       setAudioTrack(false);
     });
     audioElement.addEventListener('waiting', (event) => {
@@ -740,13 +850,13 @@ const Audiocontroller = (function() {
     !playing && clearInterval(handle);
   };
   // send in a container object which will handle the subscriptions and publishings
-  (function(container) {
+  (function (container) {
     // the id represents a unique subscription id to a topic
     let id = 0;
 
     // subscribe to a specific topic by sending in
     // a callback function to be executed on event firing
-    container.subscribe = function(topic, f) {
+    container.subscribe = function (topic, f) {
       if (!(topic in container)) {
         container[topic] = [];
       }
@@ -761,7 +871,7 @@ const Audiocontroller = (function() {
 
     // each subscription has its own unique ID, which is use
     // to remove a subscriber from a certain topic
-    container.unsubscribe = function(topic, id) {
+    container.unsubscribe = function (topic, id) {
       const subscribers = [];
       for (const subscriber of container[topic]) {
         if (subscriber.id !== id) {
@@ -771,15 +881,17 @@ const Audiocontroller = (function() {
       container[topic] = subscribers;
     };
 
-    container.publish = function(topic, data) {
+    container.publish = function (topic, data) {
       for (const subscriber of container[topic]) {
         subscriber.callback(data);
       }
     };
   })(publisherSubscriber);
+  changeIconPlay = (data) => {
 
+  };
   const subscribionId1 = publisherSubscriber.subscribe('audioPlaying', (data) => {
-    if (data) {
+    if (data[0]) {
       playButton.dataset.playing = 'true';
       playButton.innerHTML = 'pause';
     } else {
@@ -789,32 +901,48 @@ const Audiocontroller = (function() {
   });
   const subscribionId2 = publisherSubscriber.subscribe('audioPlaying', (data) => {
     console.log('this is for card');
+    if (data[1] == 1) {
+
+    }
   });
   const subscribionId3 = publisherSubscriber.subscribe('audioPlaying', (data) => {
     console.log('this is for queue');
   });
-  audioPlay = (id = 0) => {
+  changeCard = (element) => {
+    currentCard = element;
+  };
+  audioPlay = (id = 0, type = 0) => {
+    audioPlayForPublishers[1] = typeEvent;
     startAudio();
+    let song;
     switch (id) {
+      case 0:
+        song = queueCommands.play();
+        break;
       case 1:
         pause();
-        playNext();
+        song=playNext();
         break;
       case 2:
-        // TODO : add play previous
+        pause();
+        song = playPrev();
         break;
       default: break;
     }
-    const song = queueCommands.play();
     const checkNext = queueCommands.checkNext();
     const nextButton = _('#next-button');
     nextButton.disabled = !checkNext;
     if (typeof song !== 'undefined') {
-      if (currentSong !== song) {
+      if (currentSong.songAudioUrl !== song.songAudioUrl) {
         currentSong = song;
-        changeSongUrl(currentSong.getSongAudioUrl);
+        changeSongUrl(currentSong.songAudioUrl);
+        showController1();
       }
-      (audioElement.paused) ? play() : pause();
+      const pauseCheck = audioElement.paused;
+      typeEvent = type;
+      audioPlayForPublishers[0] = pauseCheck;
+      audioPlayForPublishers[1] = typeEvent;
+      (pauseCheck) ? play() : pause();
       return true;
     } else {
       return false;
@@ -826,25 +954,33 @@ const Audiocontroller = (function() {
   };
 })();
 
-const callController ={
-  callAjax: function(type ='POST', data={},url='',dataType={},callBack){
+const callController = {
+  callAjax: function (type = 'POST', data = {}, url = '', dataType = {}, callBack) {
     $.ajax({
-      type:type,
-      data:data,
-      url:url,
-      success:(output,status)=>{
-        callBack(output,status);
+      type: type,
+      data: data,
+      url: url,
+      success: (output, status) => {
+        callBack(output, status);
       },
     });
-  }
-}
-const uIHandler = () => {
-  const mainHome = _('#main-home');
+  },
+};
 
-  const cardsList = new CardsList(cardList, 'djdsd', 'dskdjs');
+const mainHome = _('#main-home');
+changeHome = (data, status) => {
+  const results = JSON.parse(JSON.parse(JSON.stringify(data)));
+  console.log(results);
+  results.map((result)=>{
+  const cardsList = new CardsList(result, result.info.title, 'dkdjs');
   const cardsListDom = cardsList.getCardListDOM();
   console.log(cardsListDom);
   mainHome.appendChild(cardsListDom);
+  });
+  uIHandler();
+};
+callController.callAjax('GET', {}, './getHomeData.php', {}, (data, status) => changeHome(data, status));
+const uIHandler = () => {
   const playButton = _('#play-button');
   const shuffleButton = _('#shuffleButton');
   const prevButton = _('#prev-button');
@@ -864,6 +1000,20 @@ const uIHandler = () => {
   const leftArrowButtons = _('.left-arrow-button');
   const rightArrowButtons = _('.right-arrow-button');
   const cardListHolders = _('.section-card-list-holder');
+  const cardPlayButtons = _('.card-play-button');
+  const contentDetails = _('.content-details');
+  const mainHomeHolder = _('#main-home-holder');
+  const like = _("#like");
+  const playListControllerButton = _('#playlist_controller_button');
+  const picPlayButtons=_('.cover-card-song-item-image-container-overlay-button');
+  const playBtn=_('#cover-play-button');
+  prevButtonClick = (event) => {
+    const disable = prevButton.disabled;
+    const check = Audiocontroller.execute(2);
+    // if (!disable) {
+    //   prevButton.disabled = false;
+    // }
+  };
   playButtonClick = () => {
     playButton.disabled = true;
     const check = Audiocontroller.execute();
@@ -876,7 +1026,7 @@ const uIHandler = () => {
     queueCommands.shuffle();
     Audiocontroller.execute();
     shuffleButton.disabled = true;
-    setTimeout(function() {
+    setTimeout(function () {
       shuffleButton.disabled = false;
     }, 1000);
   };
@@ -914,9 +1064,71 @@ const uIHandler = () => {
         break;
     }
   };
-  searchAfterDataRetrieval = (data,value) => {
-    
-    let filterList = data['searchItems'];
+  addCoverPlaylistSongs = (data) => {
+          const result = JSON.parse(JSON.parse(JSON.stringify(data)));
+          console.log(result);
+          const playlistInfo = result['playlist_info'][0];
+          const queue = result['queue'];
+          queueCommands.queueInit([], playlistInfo.playlist_type, playlistInfo.playlist_name, playlistInfo.playlist_photo_url);
+          for (let index = 0; index < queue.length; index++) {
+            const element = queue[index];
+            const songsCommands = commandMusicController.songs().commands;
+            const song = songsCommands.init(element.song_id, element.song_name, song_folder_path + element.song_src, image_folder_path + element.profile_pic, 0, element.artist, 'as', element.rating);
+            queueCommands.addSong(song);
+          }
+  };
+  playBtnClick = (event, type) => {
+    const playBtn = event.currentTarget;
+    const coverPage = _('#cover-page');
+    const id = parseInt(coverPage.dataset.coverplaylistid);
+    function cardPlay(data, status) {
+        if (status === 'success') {
+          addCoverPlaylistSongs = (data) => {
+          const result = JSON.parse(JSON.parse(JSON.stringify(data)));
+          console.log(result);
+          const playlistInfo = result['playlist_info'][0];
+          const queue = result['queue'];
+          queueCommands.queueInit([], playlistInfo.playlist_type, playlistInfo.playlist_name, playlistInfo.playlist_photo_url);
+          for (let index = 0; index < queue.length; index++) {
+            const element = queue[index];
+            const songsCommands = commandMusicController.songs().commands;
+            const song = songsCommands.init(element.song_id, element.song_name, song_folder_path + element.song_src, image_folder_path + element.profile_pic, 0, element.artist, 'as', element.rating);
+            queueCommands.addSong(song);
+          }
+          };
+          addCoverPlaylistSongs(data);
+          if(type==2){
+            queueCommands.shuffle();
+          }
+          Audiocontroller.execute(0, 1);
+        }
+      };
+      callController.callAjax('POST', { playlist_id: id }, './getQueue.php', {}, (data, status) => cardPlay(data, status));
+    // const playButtonI = playButton.querySelector('i');
+    // playButtonI.innerHTML = 'play_circle_outline';
+  };
+
+  // for (let index = 0; index < cardPlayButtons.length; index++) {
+  //   const element = cardPlayButtons[index];
+  //   element.addEventListener('click', (event) => cardPlayButtonClick(event));
+  // }
+  likeButtonClick = (event) => {
+    afterLikeButtonClick=(data,status)=>{
+if(status==='success'){
+  if(data==1){
+   likeElement.style.color='#ff1744';    
+  }
+  else{
+    likeElement.style.color='white';
+  }
+}
+    };
+    const likeElement = event.currentTarget;
+    const dataLike = likeElement.dataset.like;
+      callController.callAjax('POST',{liked:likeElement.dataset.like, song_id:likeElement.dataset.songid},'like.php',{},(data,status)=>afterLikeButtonClick(data, status));
+    };
+  searchAfterDataRetrieval = (data, value) => {
+    const filterList = data['searchItems'];
     const dropDown = document.getElementsByClassName('dropdown-menu')[0];
 
     dropDown.style.display = 'block';
@@ -934,8 +1146,8 @@ const uIHandler = () => {
         const span = document.createElement('span');
         div.className = 'dataset';
         a.className = 'dropdown-item dropdown-suggestion';
-        a.href = song_folder_path+itemValue['song_src'];
-        img.src = image_folder_path+itemValue['profile_pic'];
+        a.href = song_folder_path + itemValue['song_src'];
+        img.src = image_folder_path + itemValue['profile_pic'];
         img.alt = itemValue['name'];
         let tempStartIndex = 0;
         while ((match = patternString.exec(name))) {
@@ -958,7 +1170,7 @@ const uIHandler = () => {
   };
   searchInputKeyUp = (event) => {
     event.preventDefault();
-    
+
     const dropDown = document.getElementsByClassName('dropdown-menu')[0];
     const keyDownArrow = 40;
     let previousKey;
@@ -972,18 +1184,18 @@ const uIHandler = () => {
     if (!isKeyDownArrow()) {
       const value = event.currentTarget.value.trim();
       const conditionValue = value != undefined && value != null && value != '';
-      if(conditionValue){
-      callController.callAjax('POST',{searchInput:value},'../rhythm/databaseTasks/search.php',{},
-      (data,status)=>{
-        if(status==='success'){
-        const jsonData = JSON.parse(JSON.parse(JSON.stringify(data)));
-        console.log(jsonData);
-          searchAfterDataRetrieval(jsonData, value);
-        }
-      });
-    } else{
-      dropDown.style.display='none';
-    }
+      if (conditionValue) {
+        callController.callAjax('POST', { searchInput: value }, '../rhythm/databaseTasks/search.php', {},
+          (data, status) => {
+            if (status === 'success') {
+              const jsonData = JSON.parse(JSON.parse(JSON.stringify(data)));
+              console.log(jsonData);
+              searchAfterDataRetrieval(jsonData, value);
+            }
+          });
+      } else {
+        dropDown.style.display = 'none';
+      }
     }
   };
   menuClick = (event) => {
@@ -1037,6 +1249,92 @@ const uIHandler = () => {
     searchBlockText.classList.add('close-search-text');
     // searchFormContainer.style.display = 'none';
   };
+  showPlayList = (event) => {
+    event.preventDefault();
+    showPlay = (data,status)=>{
+      
+      if(status=='success'){
+        console.log(data);
+        let coverPage = _('#cover-page');
+        if (coverPage) {
+          coverPage.parentNode.removeChild(coverPage);
+        }
+        const node=jQuery.parseHTML(data);
+        mainHomeHolder.appendChild(node[0]);
+        coverPage = _('#cover-page');
+        const playBtn = _("#cover-play-button");
+        const shuffleBtn = _('#cover-shuffle-button');
+        playBtn.addEventListener('click', (event) => playBtnClick(event, 1));
+        shuffleBtn.addEventListener('click', (event) => playBtnClick(event, 2));
+        playListControllerButton.dataset.open='true';
+        
+        coverPage.classList.remove('close-cover-page');
+        coverPage.classList.add('open-cover-page');
+        const AC = Audiocontroller;
+        picPlayButtonClick = (event, playListId) => {
+          const element = event.currentTarget;
+          const songId = element.dataset.coversongid;
+          const currentSong = queueCommands.play();
+          if(currentSong){
+              if(currentSong.album==playListId){
+                queueCommands.setSong(parseInt(songId));
+                AC.execute();
+              } else {
+                    function picPlay(data, status) {
+                      if (status === 'success') {
+                        const result = JSON.parse(JSON.parse(JSON.stringify(data)));
+                        console.log(result);
+                        const playlistInfo = result['playlist_info'][0];
+                        const queue = result['queue'];
+                        queueCommands.queueInit([], playlistInfo.playlist_type, playlistInfo.playlist_name, playlistInfo.playlist_photo_url);
+                        for (let index = 0; index < queue.length; index++) {
+                          const element = queue[index];
+                          const songsCommands = commandMusicController.songs().commands;
+                          const song = songsCommands.init(element.song_id, element.song_name, song_folder_path + element.song_src, image_folder_path + element.profile_pic, 0, element.artist, element.album_id, element.rating);
+                          queueCommands.addSong(song);
+                        }
+                        queueCommands.setSong(parseInt(songId));
+                        AC.execute();
+                      }
+                };
+                callController.callAjax('POST', { playlist_id: playListId }, './getQueue.php', {}, (data, status) => picPlay(data, status));
+              }
+          }
+
+        }
+        const picPlayButtons=_('.cover-card-song-item-image-container-overlay-button');
+        for (let index = 0; index < picPlayButtons.length; index++) {
+          const element = picPlayButtons[index];
+          element.addEventListener('click',(event)=>picPlayButtonClick(event,playListId));
+        }
+      }
+    };
+    const element = event.currentTarget;
+    const playListId = element.getAttribute('data-playlist-id');
+    console.log(playListId);
+    callController.callAjax('POST', { playlist_id: playListId }, './playlist.php', {}, (data, status) => showPlay(data, status));
+    event.stopPropagation();
+  }
+
+  playListControllerButtonClick = (event)=>{
+    const element= event.currentTarget;
+    const coverPage = _('#cover-page');
+    if(element.dataset.open=='false'){
+      element.dataset.open='true';
+      if(coverPage){
+        coverPage.classList.add('open-cover-page');
+        coverPage.classList.remove('close-cover-page');
+      }
+      
+    } else{
+      element.dataset.open='false';
+      if(coverPage){
+        coverPage.classList.add('close-cover-page');
+        coverPage.classList.remove('open-cover-page');
+      }
+    }
+  };
+
   playButton.addEventListener('click', (event) => playButtonClick());
   shuffleButton.addEventListener('click', (event) => shuffleButtonClick());
   nextButton.addEventListener('click', (event) => nextButtonClick());
@@ -1044,6 +1342,13 @@ const uIHandler = () => {
   headerSearchInput.addEventListener('keyup', (event) => searchInputKeyUp(event));
   searchContainer.addEventListener('click', (event) => searchContainerClick());
   mainBackIcon.addEventListener('click', (event) => mainBackIconClick());
+  prevButton.addEventListener('click', (event) => prevButtonClick());
+  like.addEventListener('click', (event) => likeButtonClick(event));
+  playListControllerButton.addEventListener('click',(event)=> playListControllerButtonClick(event));
+  for (let i = 0; i < contentDetails.length; i++){
+    const element = contentDetails[i];
+    element.addEventListener('click', (event)=>showPlayList(event));
+  }
   document.addEventListener('click', () => {
     if (optionsMenu.style.display == 'block') {
       optionsMenu.style.display = 'none';
@@ -1137,8 +1442,5 @@ const uIHandler = () => {
     elementListForAnimation[name] = [];
   };
 };
-const c = new Card('akjs', 'adsa', 'image/song.jpg', 'sadad', 0);
-console.log(c.getCardDOM());
 
 // console.log(c.commandAudioController('play'));
-uIHandler();
