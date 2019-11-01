@@ -4,6 +4,10 @@
       rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="contact.css">
 	<title></title>
+	<?php
+	session_start();
+  if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
+	?>
 </head>
 <body>
 <div class="main">
@@ -65,3 +69,9 @@
 </div>
 </body>
 </html>
+<?php
+  }
+  else if(!isset($_SESSION['logged_in']) || (isset($_SESION['logged_in']) && $_SESSION['logged_in'] == 0)){
+    header('Location: error.html');
+} 
+?>

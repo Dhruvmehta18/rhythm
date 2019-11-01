@@ -203,20 +203,19 @@
                   <h2>Title</h2>
                   <div class="subtitle-style-scope">
                     <span dir="auto" class="style-scope yt-formatted-string">Playlist</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">•</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">Rhythm</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">•</span>
+                    <span dir="auto" class="style-scope yt-formatted-string"></span>
+                    <span dir="auto" class="style-scope yt-formatted-string"></span>
+                    <span dir="auto" class="style-scope yt-formatted-string"></span>
                     <span dir="auto" class="style-scope yt-formatted-string"></span>
                   </div>
                   <div class="subtitle-style-scope">
-                    <span dir="auto" class="style-scope yt-formatted-string">58 songs</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">•</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">3 hours, 48 minutes</span>
+                    <span dir="auto" class="style-scope yt-formatted-string"></span>
+                    <span dir="auto" class="style-scope yt-formatted-string"></span>
+                    <span dir="auto" class="style-scope yt-formatted-string"></span>
                   </div>
                   <div class="destcription subtitle-style-scope">
                     <span dir="auto" class="style-scope yt-formatted-string">
-                      Listen to songs from Sheeran and other likeminded artists who represent a new vanguard of
-                      guitar-slinging troubadours.</span
+                      </span
                     >
                   </div>
                 </div>

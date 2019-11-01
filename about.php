@@ -4,6 +4,10 @@
 	<title></title>
 </head>
 <body>
+	<?php
+	session_start();
+  if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
+	?>
 <div class="container">
 	<p class="upper-note">We believe the<br>best experience <br>always wins...</p>
 </div>
@@ -34,3 +38,9 @@
 	</div>
 </div></body>
 </html>
+<?php
+  }
+  else if(!isset($_SESSION['logged_in']) || (isset($_SESION['logged_in']) && $_SESSION['logged_in'] == 0)){
+    header('Location: error.html');
+} 
+?>

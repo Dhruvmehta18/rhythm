@@ -7,6 +7,7 @@ try {
   $conn1 = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   $conn1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $cardList = array();
+  $temp=array();
   include('matrix.php');
   if(!empty($recommended)){
     $recommend=array('info'=>array('title'=>'Recommended For You'),'cards'=>array());
@@ -26,8 +27,20 @@ try {
       $stmt3->bindParam(':album_id', intval($value[0]), PDO::PARAM_INT);
       $stmt3->execute();
       $fetch_playlist = $stmt3->fetchAll();
+      $pl=$fetch_playlist[0]['playlist_id'];
+      // echo "p1"."$pl";
+      $flag=0;
+      for ($i=0; $i <count($temp) ; $i++) { 
+        if($temp[$i]==$pl){
+          $flag=1;
+        }
+      }
+      if($flag!=1){
+      array_push($temp, $pl);
       array_push($recommend['cards'], $fetch_playlist[0]);
       }
+      // array_values($temp);
+    }
     array_push($cardList,$recommend);
   }
   $newReleases=array('info'=>array('title'=>'New Releases'),'cards'=>array());

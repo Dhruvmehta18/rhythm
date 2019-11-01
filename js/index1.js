@@ -36,7 +36,7 @@ class Song {
     return this.rating;
   }
 }
-
+const previndex=-1;
 class SongsQueue {
   constructor(songsList, listType, queueTitle, queueImageUrl) {
     if (!sessionStorage.queue) {
@@ -111,7 +111,7 @@ class SongsQueue {
     if (typeof prevSong ==='undefined' ||prevSong.songAudioUrl !== song.songAudioUrl) {
       prevSong = song;
       const q = prevQueue;
-      q.push(song);
+      q.push(prevSong);
       sessionStorage.queue=JSON.stringify(q);
     }
     const queue = JSON.parse(sessionStorage.queue);
@@ -125,11 +125,18 @@ class SongsQueue {
     }
   }
   prevSong(){
-    const song = this.queueList[this.queueCurrent]
+    const song = this.queueList[this.queueCurrent];
     const prevQueue = JSON.parse(sessionStorage.queue);
-    let prevSong = prevQueue[prevQueue.length-1];
+    --previndex;
+    let prevSong = prevQueue[prevQueue.length+previndex];
     if(prevSong.songAudioUrl === song.songAudioUrl){
-      prevSong=prevQueue[prevQueue.length-2];
+      if(previndex<0&&prevQueue.length>1){
+      --previndex;
+      prevSong=prevQueue[prevQueue.length+previndex];
+      }
+      else{
+        return song;
+      }
     }
     return prevSong;
   }
@@ -532,10 +539,10 @@ class Card {
     button1.appendChild(i1);
     button2.appendChild(i2);
     button1.addEventListener('click', (event) => cardPlayButtonClick(event, this.getCardId));
-    app(card_music_control_button_container1, button);
+    // app(card_music_control_button_container1, button);
     app(card_music_control_button_container2, button1);
-    app(card_music_control_button_container3, button2);
-    app(card_music_controls_container, card_music_control_button_container1, card_music_control_button_container2, card_music_control_button_container3);
+    // app(card_music_control_button_container3, button2);
+    app(card_music_controls_container, card_music_control_button_container2);
     app(content_details, card_music_controls_container);
     app(content, content_overlay, content_image, content_details);
     app(container, content);
@@ -705,12 +712,14 @@ const Audiocontroller = (function () {
     check && audioElement.pause();
   };
   playNext = () => {
-    const song = queueCommands.nextSong();
+    const t = queueCommands.next();
+    const song = queueCommands.play();
     showController1();
     return song;
   };
   playPrev = () => {
-    return queueCommands.prev();
+    const song = queueCommands.prev();
+    return song;
   };
   showController1 = () => {
       const controller1 = _('.controller-1')[0];
@@ -719,6 +728,9 @@ const Audiocontroller = (function () {
       const cardSubHeading = _(' .data .card-subHeading')[0];
       const likeElement = _('#like');
     if (currentSong) {
+      
+      img.style.display='block';
+      likeElement.style.display='block';
       img.src = currentSong.songImageUrl;
       cardHeading.innerText = currentSong.songName;
       cardSubHeading.innerText = currentSong.artists;
@@ -730,7 +742,8 @@ const Audiocontroller = (function () {
         likeElement.style.color='white';
       }
     } else {
-      img.src = './image/song.jpg';
+      likeElement.style.display='none';
+      img.style.display='none';
       cardHeading.innerText = '';
       cardSubHeading.innerText = '';
     }
@@ -1116,16 +1129,18 @@ const uIHandler = () => {
     afterLikeButtonClick=(data,status)=>{
 if(status==='success'){
   if(data==1){
-   likeElement.style.color='#ff1744';    
+   likeElement.style.color='#ff1744';  
+   likeElement.dataset.like='true';  
   }
   else{
     likeElement.style.color='white';
+   likeElement.dataset.like='false'; 
   }
 }
     };
     const likeElement = event.currentTarget;
     const dataLike = likeElement.dataset.like;
-      callController.callAjax('POST',{liked:likeElement.dataset.like, song_id:likeElement.dataset.songid},'like.php',{},(data,status)=>afterLikeButtonClick(data, status));
+      callController.callAjax('POST',{liked:dataLike, song_id:likeElement.dataset.songid},'like.php',{},(data,status)=>afterLikeButtonClick(data, status));
     };
   searchAfterDataRetrieval = (data, value) => {
     const filterList = data['searchItems'];
@@ -1302,6 +1317,11 @@ if(status==='success'){
           }
 
         }
+        // const downloadButton=_('.downloadButton');
+        // for (let index = 0; index < picPlayButtons.length; index++) {
+        //   const element = picPlayButtons[index];
+        //   element.addEventListener('click',(event)=>downloaPlayButtonClick(event,playListId));
+        // }
         const picPlayButtons=_('.cover-card-song-item-image-container-overlay-button');
         for (let index = 0; index < picPlayButtons.length; index++) {
           const element = picPlayButtons[index];

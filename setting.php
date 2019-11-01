@@ -2,6 +2,7 @@
  include("connection.php");
  error_reporting(0);
  session_start();
+ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
  $email=$_SESSION['email'];
  $query="SELECT * FROM users where email like '$email'";
  $data= mysqli_query($conn,$query);
@@ -13,13 +14,18 @@ $res=$x." ".$y;
 
 <html>
 <head>
-    
+<link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      type="text/css"
+      rel="stylesheet"
+    />    
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/settings.css">
 
 </head>
 <body>
 <div class="container emp-profile">
+<div id="snackbar"></div>
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-4">
@@ -36,8 +42,11 @@ $res=$x." ".$y;
                                 </form>
 
                     
-                    <div class="col-md-6">
-                        <div class="profile-head">
+                    <div class="col-md-6" style="display:inline;">
+                    <a href="main.php"><i class="material-icons" style="margin-left:120%;font-size:36px;">
+keyboard_backspace
+</i></a>
+                        <div class="profile-head" style="display:inline;">
                                    <h2> <?php echo $res; ?>
                                      </h2>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -112,3 +121,9 @@ $res=$x." ".$y;
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="js/setting.js"></script>
 </html>
+<?php
+}
+else if(!isset($_SESSION['logged_in']) || (isset($_SESION['logged_in']) && $_SESSION['logged_in'] == 0)){
+    header('Location: error.html');
+} 
+?>

@@ -11,7 +11,7 @@
   }
   #main-home-container {
     width: 100%;
-    height: calc(100% - 160px);
+    height: calc(100% - 100px);
     position: fixed;
     top: 60px;
   }
@@ -314,65 +314,7 @@
   }
 }
 .close-cover-page{
-  animation: close-cover 0.5s ease-in 0s 1 normal both;
-}
-@-webkit-keyframes close-cover{
-  from {
-    width: 100%;
-    height: calc(100% - 160px);
-    top:60;
-    left: 0;
-  }
-  to{
-    width: 0;
-    height: 0;
-    top: calc(100% - 160px);
-    right: 0;
-  }
-}
-@keyframes close-cover{
-  0% {
-    top:60;
-    left: 0;
-    height: calc(100% - 160px);
-  }
-  90%{
-    width: 100%;
-  }
-  100%{
-    width: 0;
-    height: 0;
-    top: calc(100% - 160px);
-    right: 0;
-  }
-}
-
--webkit-keyframes open-cover{
-  from {
-    width: 0;
-    height: 0;
-  }
-  to{
-    width: 100%;
-    height: calc(100% - 160px);
-  }
-}
-@keyframes open-cover{
-  from {
-    width: 0;
-    height: 0;
-    top: calc(100% - 160px);
-    right: 0;
-  }
-  to{
-    width: 100%;
-    height: calc(100% - 160px);
-    top:60;
-    left: 0;
-  }
-}
-.close-cover-page{
-  animation: close-cover 0.5s ease-in 0s 1 normal both;
+  animation: close-cover 0.5s ease-in 0s 1 normal forwards;
 }
 @-webkit-keyframes close-cover{
   from {
@@ -402,6 +344,66 @@
     height: 0;
     bottom: calc(100% - 160px);
     right: 0;
+  }
+}
+
+-webkit-keyframes open-cover{
+  from {
+    width: 0;
+    height: 0;
+    top: calc(100% - 160px);
+    left: 100%;
+  }
+  to{
+    width: 100%;
+    height: calc(100% - 160px);
+    top:60px;
+    left: 0;
+  }
+}
+@keyframes open-cover{
+  from {
+    width: 0;
+    height: 0;
+    top: calc(100% - 160px);
+    left: 100%;
+  }
+  to{
+    width: 100%;
+    height: calc(100% - 160px);
+    top:60px;
+    left: 0;
+  }
+}
+.close-cover-page{
+  animation: close-cover 0.5s ease-in 0s 1 normal forwards;
+}
+@-webkit-keyframes close-cover{
+  0% {
+    bottom:60px;
+    right:0;
+    width: 100%;
+    height: calc(100% - 160px);
+  }
+  100%{
+    width: 0;
+    height: 0;
+    bottom:60px;
+    right:0;
+  }
+}
+@keyframes close-cover{
+  0% {
+    bottom:60px;
+    right:0;
+    width: 100%;
+    height: calc(100% - 160px);
+  }
+  100%{
+    width: 0;
+    height: 0;
+    bottom:60px;
+    right:0;
   }
 }
 

@@ -30,6 +30,8 @@ $image_folder_path = '/rhythm/images/';
   $stmt->bindValue(':album_id', $value);
   $stmt->execute();
   $fetch = $stmt->fetchAll();
+  $date=date_create($playlist["release_date"]);
+  // echo date_format($date,"d F, Y");
   echo '<div id="cover-page" style="display:block;" data-coverPlaylistID=';
   echo '"'. $playlist_id .'"';
   echo '>
@@ -41,23 +43,26 @@ $image_folder_path = '/rhythm/images/';
       echo '</div>
       <div class="cover-data-info-container">
         <div class="cover-data-info-extras-container">
-          <h2></h2>
+          <h2 style="font-size:32px;"> ';
+          echo $playlist["playlist_name"]; 
+          echo '</h2>
           <div class="subtitle-style-scope">
-            <span dir="auto" class="style-scope yt-formatted-string">Playlist</span>
-            <span dir="auto" class="style-scope yt-formatted-string">•</span>
+            <span dir="auto" class="style-scope yt-formatted-string">';
+            echo 'Released on '.date_format($date,"d F, Y");;
+            echo '</span>
+            <span dir="auto" class="style-scope yt-formatted-string"></span>
             <span dir="auto" class="style-scope yt-formatted-string"></span>
           </div>
           <div class="subtitle-style-scope">
             <span dir="auto" class="style-scope yt-formatted-string">';
             echo count($fetch);
             echo ' songs</span>
-            <span dir="auto" class="style-scope yt-formatted-string">•</span>
-            <span dir="auto" class="style-scope yt-formatted-string">3 hours, 48 minutes</span>
+            <span dir="auto" class="style-scope yt-formatted-string"></span>
+            <span dir="auto" class="style-scope yt-formatted-string"></span>
           </div>
           <div class="destcription subtitle-style-scope">
             <span dir="auto" class="style-scope yt-formatted-string">
-              Listen to songs from Sheeran and other likeminded artists who represent a new vanguard of
-              guitar-slinging troubadours.</span
+              </span
             >
           </div>
         </div>
@@ -120,12 +125,14 @@ $image_folder_path = '/rhythm/images/';
               </div>
               </div>
               <div class="cover-card-song-item-controller-container  cover-card-song-item-general-container">
-                <div class="cover-card-song-item-more-button-container menu">
-                  <button>
+                <div class="cover-card-song-item-more-button-container">
+                  <a href="';
+                  echo $song_folder_path.$value['song_src'];
+                  echo '" class="downloadButton" download>
                   <i class="material-icons-round">
-                  more_vert
+                  vertical_align_bottom
                 </i>
-              </button>
+              </a>
                 </div>
               </div>
               

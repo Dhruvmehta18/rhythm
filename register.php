@@ -7,6 +7,7 @@ $_SESSION['fname']=$_POST['fname'];
 $_SESSION['lname']=$_POST['lname'];
 $_SESSION['pwd']=$_POST['pwd'];
 
+
 $fn=$_POST['fname'];
 $ln=$_POST['lname'];
 $em=$_POST['email'];
@@ -17,14 +18,15 @@ $row=mysqli_num_rows($result);
 if($row>0){
     header("location: index.php");
     echo "User with this email id already exists";
+    $_SESSION['logged_in']=0;
 }
 else{
     $query="INSERT INTO users values('$fn','$ln','$em','$pw')";
     $rs=mysqli_query($conn,$query);
 
-     $_SESSION['logged_in']=true;
+     $_SESSION['logged_in']=1;
     
     console.log("You've successfully registered now");
-    header("location: setting.php");
+    header("location: main.php");
 }
 ?>

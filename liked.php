@@ -51,13 +51,12 @@ $email=$_SESSION['email'];
             <span dir="auto" class="style-scope yt-formatted-string">
             <?php echo count($fetch_liked); ?>
              songs</span>
-            <span dir="auto" class="style-scope yt-formatted-string">•</span>
-            <span dir="auto" class="style-scope yt-formatted-string">3 hours, 48 minutes</span>
+            <span dir="auto" class="style-scope yt-formatted-string"></span>
+            <span dir="auto" class="style-scope yt-formatted-string"></span>
           </div>
           <div class="destcription subtitle-style-scope">
             <span dir="auto" class="style-scope yt-formatted-string">
-              Listen to songs from Sheeran and other likeminded artists who represent a new vanguard of
-              guitar-slinging troubadours.</span>
+            </span>
           </div>
         </div>
       </div>

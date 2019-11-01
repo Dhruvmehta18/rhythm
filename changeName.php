@@ -20,7 +20,7 @@ error_reporting(0);
             border-radius: 30px;
         }
         body{
-    background: -webkit-linear-gradient(left, #3931af, #bb99ff);
+   background: -webkit-linear-gradient(left, #020202, #535353);
 
         }
         .box{

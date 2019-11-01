@@ -11,32 +11,46 @@
     />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <title>Rhythm</title>
+    
   </head>
   <?php
   include("connection.php");
   session_start(); 
-  $email=$_SESSION['email'];
+  if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1) {
+    $email=$_SESSION['email'];
   $query=mysqli_query($conn,"SELECT * from users where email like '$email'");
   $user=mysqli_fetch_assoc($query);
   $image=$user['userPic'];
   $fname=$user['fname'];
-  $lname=$user['lname'];  
-  ?>
+  $lname=$user['lname']; 
+    ?>
   <body class="dark">
+    <div class="bg-image"></div>
     <div class="root">
       <ul class="sub-menu" style="display: none;" id="options-menu">
         <li style="padding:0px 16px;margin:0;">
-          <h4 style="padding:0px;margin:0;"><?php echo ' '.$fname.' '.$lname;?></h4>
+        <h4 style="padding:0px;margin:0;"><?php echo ' '.$fname.' '.$lname;?></h4>
           <p style="padding:0px;margin:0;"><?php echo $email;?></p>
         </li>
         <li>
-          <a href="setting.php">Settings</a>
+        <a href="setting.php"><i class="material-icons" style="margin-right: 10px;
+    margin-left: -20px;
+    vertical-align: top;">settings_applications</i>Settings</a>
         </li>
         <li>
-          <a href="about.php">About us</a>
+          <a href="about.php"><i class="material-icons" style="margin-right: 10px;
+    margin-left: -20px;
+    vertical-align: top;">account_box</i>About us</a>
         </li>
         <li>
-          <a href="contact.php">Contact us</a>
+          <a href="contact.php"><i class="material-icons" style="margin-right: 10px;
+    margin-left: -20px;
+    vertical-align: top;">contact_support</i>Contact us</a>
+        </li>
+        <li>
+          <a href="logout.php"><i class="material-icons" style="margin-right: 10px;
+    margin-left: -20px;
+    vertical-align: top;">input</i>Log Out</a>
         </li>
       </ul>
       <header class="navbar-header">
@@ -52,7 +66,6 @@
                   <li class="menu-item menu-item menu-avatar" style="justify-content:flex-end;">
                     <img
                       src="<?php echo $image;?>"
-                      alt="profile image"
                       class="avatar menu"
                       style="width: 36px;height: 36px;"
                     />
@@ -106,7 +119,7 @@
                             text-indent: 0px;
                             text-rendering: auto;
                             text-transform: none;"
-              ></pre>
+              ></<h4>
               <div class="dropdown-menu"></div>
             </span>
           </div>
@@ -114,200 +127,9 @@
       </header>
       <div id="main-home-holder">
         <div id="main-home-container">
-          <nav class="page-header" id="navbar-bottom">
-            <div class="bottom-nav-container">
-              <ul class="bottom-nav-link">
-                <li class="link-container"><a href="#" class="link">Featured</a></li>
-                <li class="link-container"><a href="#" class="link">Library</a></li>
-                <li class="link-container"><a href="#" class="link">Discover</a></li>
-                <li class="link-container"><a href="#" class="link">Genre</a></li>
-              </ul>
-            </div>
-          </nav>
           <div id="main-home">
-            
           </div>
         </div>
-         <!-- <div id="cover-page" >
-          <div class="cover-page-container">
-          <div id="cover-header-top" class="cover-top">
-            <div class="cover-header-top-container">
-              <div class="cover-image-square-photo-container">
-                <img src="image/song.jpg" />
-              </div>
-              <div class="cover-data-info-container">
-                <div class="cover-data-info-extras-container">
-                  <h2>Title</h2>
-                  <div class="subtitle-style-scope">
-                    <span dir="auto" class="style-scope yt-formatted-string">Playlist</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">•</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">Rhythm</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">•</span>
-                    <span dir="auto" class="style-scope yt-formatted-string"></span>
-                  </div>
-                  <div class="subtitle-style-scope">
-                    <span dir="auto" class="style-scope yt-formatted-string">58 songs</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">•</span>
-                    <span dir="auto" class="style-scope yt-formatted-string">3 hours, 48 minutes</span>
-                  </div>
-                  <div class="destcription subtitle-style-scope">
-                    <span dir="auto" class="style-scope yt-formatted-string">
-                      Listen to songs from Sheeran and other likeminded artists who represent a new vanguard of
-                      guitar-slinging troubadours.</span
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="cover-data-info-controller-buttons-container">
-                <div class="cover-top-level-buttons">
-                  <div class="top-level-button-container">
-                    <button tabindex="-1" class="top-level-button" id="cover-play-button">
-                      <span class="top-level-button-icon">
-                        <i class="material-icons">
-                          play_arrow
-                        </i>
-                      </span>
-                      <span>Play</span>
-                    </button>
-                  </div>
-                  <div class="top-level-button-container">
-                    <button tabindex="-1" class="top-level-button" id="cover-shuffle-button">
-                      <span class="top-level-button-icon">
-                        <i class="material-icons">
-                          shuffle
-                        </i>
-                      </span>
-                      <span>Shuffle</span>
-                    </button>
-                  </div>
-                  <div class="top-level-button-container">
-                    <button tabindex="-1" class="top-level-button" id="cover-library-button">
-                      <span class="top-level-button-icon">
-                        <i class="material-icons">
-                          library_add
-                        </i>
-                      </span>
-                      <span>Add To Library</span>
-                    </button>
-                  </div>
-                  <div class="top-level-button-container">
-                    <button tabindex="-1" class="top-level-button menu" id="cover-more-button">
-                      <span class="top-level-button-icon">
-                        <i class="material-icons">
-                          more_vert
-                        </i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="cover-card-list" id="cover-body-top">
-            <div class="cover-card-list-container-holder">
-              <div class="cover-card-list-container">
-                <ul class="cover-card-song-list">
-                  <li class="cover-card-song-item">
-                    <div class="cover-card-song-item-container">
-                      <div class="cover-card-song-item-image-container cover-card-song-item-general-container">
-                        <img src="image/song.jpg" />
-                        <div class="cover-card-song-item-image-container-overlay">
-                          <div class="cover-card-song-item-image-container-overlay-button">
-                            <i class="material-icons-round">play_arrow</i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="container-flex-list cover-card-song-item-general-container">
-                      <div class="cover-card-song-item-name-container responsive-list-item-renderer ">
-                        <a href="#"><span class="cover-card-song-item-name">Slow Down</span></a>
-                      </div>
-                      <div class="cover-card-song-item-artist-container responsive-list-item-renderer">
-                        <a href="#"><span class="cover-card-song-item-artist">Arijit Singh</span></a>
-                      </div>
-                      </div>
-                      <div class="cover-card-song-item-controller-container  cover-card-song-item-general-container">
-                        <div class="cover-card-song-item-more-button-container menu">
-                          <button>
-                          <i class="material-icons-round">
-                          more_vert
-                        </i>
-                      </button>
-                        </div>
-                      </div>
-                      <div class="cover-card-song-item-duration-container  cover-card-song-item-general-container">
-                        <span class="cover-card-song-item-duration">0:00</span>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="cover-card-song-item">
-                    <div class="cover-card-song-item-container">
-                      <div class="cover-card-song-item-image-container cover-card-song-item-general-container">
-                        <img src="image/song.jpg" />
-                        <div class="cover-card-song-item-image-container-overlay">
-                          <div class="cover-card-song-item-image-container-overlay-button">
-                            <i class="material-icons-round">play_arrow</i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="container-flex-list cover-card-song-item-general-container">
-                      <div class="cover-card-song-item-name-container responsive-list-item-renderer ">
-                        <a href="#"><span class="cover-card-song-item-name">Slow Down</span></a>
-                      </div>
-                      <div class="cover-card-song-item-artist-container responsive-list-item-renderer">
-                        <a href="#"><span class="cover-card-song-item-artist">Arijit Singh</span></a>
-                      </div>
-                      </div>
-                      <div class="cover-card-song-item-controller-container  cover-card-song-item-general-container">
-                        <div class="cover-card-song-item-more-button-container menu">
-                          <button>
-                          <i class="material-icons-round">
-                          more_vert
-                        </i>
-                      </button>
-                        </div>
-                      </div>
-                      <div class="cover-card-song-item-duration-container  cover-card-song-item-general-container">
-                        <span class="cover-card-song-item-duration">0:00</span>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="cover-card-song-item">
-                    <div class="cover-card-song-item-container">
-                      <div class="cover-card-song-item-image-container cover-card-song-item-general-container">
-                        <img src="image/song.jpg" />
-                        <div class="cover-card-song-item-image-container-overlay">
-                          <div class="cover-card-song-item-image-container-overlay-button">
-                            <i class="material-icons-round">play_arrow</i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="container-flex-list cover-card-song-item-general-container">
-                      <div class="cover-card-song-item-name-container responsive-list-item-renderer ">
-                        <a href="#"><span class="cover-card-song-item-name">Slow Down</span></a>
-                      </div>
-                      <div class="cover-card-song-item-artist-container responsive-list-item-renderer">
-                        <a href="#"><span class="cover-card-song-item-artist">Arijit Singh</span></a>
-                      </div>
-                      </div>
-                      <div class="cover-card-song-item-controller-container  cover-card-song-item-general-container">
-                        <div class="cover-card-song-item-more-button-container menu">
-                          <button>
-                          <i class="material-icons-round">
-                          more_vert
-                        </i>
-                      </button>
-                        </div>
-                      </div>
-                      <div class="cover-card-song-item-duration-container  cover-card-song-item-general-container">
-                        <span class="cover-card-song-item-duration">0:00</span>
-                      </div>
-                    </div>
-                  </li>
-                </div>
-              </div>
-            </div>
-            </div>
-          </div>  -->
         </div>
         <div class="music-controller-container">
           <div id="music-controller">
@@ -316,8 +138,8 @@
                 <img src="image//song.jpg" alt="song" srcset="" />
               </div>
               <div class="data">
-                <a href="#" class="card-heading">Slow down</a>
-                <a href="#" class="card-subHeading">Arijit singh</a>
+                <a href="#" class="card-heading"></a>
+                <a href="#" class="card-subHeading"></a>
               </div>
               <div class="song-feedback">
                 <button class="controller-button material-icons-round" title="like" id="like" data-like="false"
@@ -407,4 +229,26 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/index1.js"></script>
+  <script>
+  $(document).ready(function () {
+                var imageFile = ["image1.jpg", "image3.jpg", "image2.jpg", "image5.jpg","image6.png", "image3.jpg", "image7.png"];
+                var currentIndex = 0;
+                setInterval(function () {
+                    if (currentIndex == imageFile.length) {
+                        currentIndex = 0;
+                    }
+                    $("#main-home").css({'background-image':'url("image/' + imageFile[currentIndex++] + '")',"background-repeat": "no-repeat",
+    "background-size": "cover",
+    "background-position": "center"});
+                }, 10000);
+            });
+  </script>
+  
+  </script>
 </html>
+
+  <?php
+  } else if(!isset($_SESSION['logged_in']) || (isset($_SESION['logged_in']) && $_SESSION['logged_in'] == 0)){
+    header('Location: error.html');
+} 
+  ?>

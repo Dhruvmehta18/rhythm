@@ -37,7 +37,7 @@ $newFilename = $name.'_'.$shaFile.'.'.$fileType;
 $target_file = $target_dir . $newFilename;
 $file_size = $_FILES["fileToUpload"]["size"];
 // Check file size
-if ($file_size > ) {
+if ($file_size > 5e7) {
     $status['message']="Sorry, your file is too large."; 
     echo json_encode($status);
     $uploadOk = 0;
@@ -60,6 +60,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         include 'connection.php';
         $status['type']='success';
+        $status['message']='Uploaded Successfully';
         $status['data']=$target_file;
         $query="UPDATE users SET userPic='$target_file' where email like '$email'";
         $data= mysqli_query($conn,$query);
